@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yzrilyzr.floatingwindow" >
+
+    <application
+		android:allowBackup="true"
+		android:icon="@drawable/icon"
+		android:hardwareAccelerated="true"
+		android:label="@string/app_name"
+		android:largeHeap="true">
+        <activity
+			android:name=".MainActivity"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<action android:name="android.intent.action.EDIT" />
+				<action android:name="android.intent.action.PICK" />
+				<action android:name="android.intent.action.SEARCH" />
+				<action android:name="android.intent.action.WEB_SEARCH" />
+				<action android:name="android.intent.action.GET_CONTENT" />
+				<category android:name="android.intent.category.OPENABLE" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="*/*"/>
+				<!--data android:scheme="file"/>
+				<data android:scheme="http"/>
+				<data android:scheme="ftp"/>
+                <data android:scheme="https"/-->
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="com.mojang.minecraftpe.MainActivity"
+			android:label="MODPE模拟器(代理Activity)(按返回键退出)"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".AboutActivity"/>
+		<activity android:name=".Home">
+            <intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.HOME" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+        <service android:name=".PluginService"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="com.yzrilyzr.Service" />
+			</intent-filter>
+		</service>
+		<service android:name=".AccessibilityService"
+			android:enabled="true"
+			android:exported="true"
+			android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+				<action android:name="android.accessibilityservice.AccessibilityService" />	
+			</intent-filter>
+			<meta-data
+				android:name="android.accessibilityservice"
+				android:resource="@xml/accessibility">
+			</meta-data>
+        </service>
+		<receiver android:name=".mBroadcastReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />		
+				<action android:name="com.yzrilyzr.close" />
+				<action android:name="com.yzrilyzr.callback" />
+				<action android:name="android.intent.action.PACKAGES_SUSPENDED"/>
+				<action android:name="android.intent.action.PACKAGES_UNSUSPENDED"/>
+				<action android:name="android.intent.action.PACKAGE_ADDED"/>
+				<action android:name="android.intent.action.PACKAGE_CHANGED"/>
+				<action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
+				<action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
+				<action android:name="android.intent.action.PACKAGE_FULLY_REMOVED"/>
+				<action android:name="android.intent.action.PACKAGE_INSTALL"/>
+				<action android:name="android.intent.action.PACKAGE_NEEDS_VERIFICATION"/>
+				<action android:name="android.intent.action.PACKAGE_REMOVED"/>
+				<action android:name="android.intent.action.PACKAGE_REPLACED"/>
+				<action android:name="android.intent.action.PACKAGE_RESTARTED"/>
+				<action android:name="android.intent.action.PACKAGE_VERIFIED"/>
+			</intent-filter>
+		</receiver>
+		<meta-data
+            android:name="fwplugin"
+            android:value="true"/>
+		<meta-data
+            android:name="fwpluginclasses"
+            android:value="@string/reg_apps"/>
+		<meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="悬浮窗" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="54" />
+    </application>
+
+	<uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />															  
+	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+	<uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.VIBRATE"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+
+	<!-- PROTECTION_NORMAL 普通权限+++++++++++++++++++++++++++++++++++++++++++++++++++++++- Start -->
+
+    <!-- 允许应用程序访问额外的位置提供程序命令 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!-- 允许应用程序访问有关网络的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 允许应用程序访问有关Wi-Fi网络的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 允许应用程式连线至已配对的蓝牙装置 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <!-- 允许应用程序发现和配对蓝牙设备 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- 允许应用程序广播粘性意图。
+	这些是其数据在完成之后由系统保存的广播，使得客户端可以快速检索该数据，而不必等待下一个广播 -->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <!-- 允许应用更改网络连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <!-- 允许应用程序进入Wi-Fi多播模式 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <!-- 允许应用程序在不安全的情况下禁用键盘锁 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <!-- 允许应用程序展开或折叠状态栏 -->
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+    <!-- 允许应用程序查找任何包所使用的空间 -->
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <!-- 允许应用程序在Launcher中安装快捷方式 -->
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT"/>
+    <!-- 允许应用程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 允许应用程序调用killBackgroundProcesses（String） -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <!-- 允许应用修改全局音频设置 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <!-- 允许应用程序执行I/O操作在NFC -->
+    <uses-permission android:name="android.permission.NFC"/>
+    <!-- 允许应用程式读取同步设定 -->
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <!-- 允许应用程序读取同步统计信息 -->
+    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
+    <!-- 允许应用程序接收系统完成引导后广播的ACTION_BOOT_COMPLETED。
+	如果您不请求此权限，您将不会在当时收到广播。虽然拥有此权限没有任何安全隐患，
+	但它可能会对用户体验产生负面影响，即增加系统启动所需的时间，并允许应用程序
+	在用户不知情的情况下运行应用程序。因此，您必须明确声明您使用此工具使其对用户可见。 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- 允许应用更改任务的Z顺序 -->
+    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <!-- 必须持有应用程序的权限才能使用ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS。
+	这是一个正常的权限：请求它的应用程序将始终被授予权限，用户无需批准或查看它。 -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <!-- 允许应用程序请求安装软件包。
+	指定大于22的API的应用程式必须拥有此权限才能使用ACTION_INSTALL_PACKAGE。 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <!-- 允许应用程序广播用于为用户设置闹钟的意图。 -->
+    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <!-- 允许应用程序设置系统时区。 -->
+    <uses-permission android:name="android.permission.SET_TIME_ZONE"/>
+    <!-- 允许应用程序设置壁纸。 -->
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <!-- 允许应用程序设置壁纸提示。 -->
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS"/>
+    <!-- 允许使用设备的红外发射器（如果有）。 -->
+    <uses-permission android:name="android.permission.TRANSMIT_IR"/>
+    <!-- 不再支持此权限。。 -->
+    <uses-permission android:name="android.permission.UNINSTALL_SHORTCUT"/>
+    <!-- 允许应用使用指纹硬件。 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <!-- 允许访问振动器。。 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 允许使用PowerManager WakeLocks防止处理器休眠或屏幕变暗。 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- 允许应用程序写入同步设置。 -->
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+
+    <!-- PROTECTION_NORMAL 普通权限++++++++++++++++++++++++++++++++++++++++++++++++++++++++- End  -->
+
+    <!-- 11111111111111111111 === 我是分割线 === 1111111111111111111111 -->
+
+    <!-- 表 1. 危险权限和权限组。=========================================================  Start  -->
+
+    <!-- 用于与用户日历相关的运行时权限 -->
+    <permission-group android:name="android.permission-group.CALENDAR"/>
+    <!-- 允许应用程式读取使用者的日历资料。 -->
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <!-- 允许应用程序写入用户的日历数据。 -->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+
+    <!-- 用于与访问摄像头或从设备捕获图像/视频相关联的权限。 -->
+    <permission-group android:name="android.permission-group.CAMERA"/>
+    <!-- 需要能够访问摄像机设备。这将自动强制所有相机功能的}清单元素。
+	如果您不需要所有相机功能，或者如果相机不可用则可以正常操作，
+	则必须根据需要修改清单，以便在不支持所有相机功能的设备上进行安装。 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!-- 用于与此设备上的联系人和个人资料相关的运行时权限 -->
+    <permission-group android:name="android.permission-group.CONTACTS"/>
+    <!-- Allows an application to read the user's contacts data. -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- Allows an application to write the user's contacts data. -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <!-- 允许访问帐户服务中的帐户列表。 -->
+    <!-- 注意：从Android 6.0（API级别23）开始，如果应用程序共享管理帐户的验证器的签名，
+	则它不需要“GET_ACCOUNTS”权限来读取有关该帐户的信息。在Android 5.1及更低版本中，
+	所有应用程序都需要“GET_ACCOUNTS”权限才能读取任何帐户的相关信息。-->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <!-- 用于允许访问设备位置的权限 -->
+    <permission-group android:name="android.permission-group.LOCATION"/>
+    <!-- 允许应用程序访问精确位置。或者，你可能想access_coarse_location。 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 允许应用程序访问近似位置。或者，你可能想access_fine_location。 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!-- 用于与从设备访问麦克风音频相关联的权限。
+	请注意，电话呼叫也会捕获音频，但是位于单独（更可见）权限组中。 -->
+    <permission-group android:name="android.permission-group.MICROPHONE"/>
+    <!-- Allows an application to record audio. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <!-- 用于关联电话功能的权限。 -->
+    <permission-group android:name="android.permission-group.PHONE"/>
+    <!-- 允许只读访问电话状态，包括设备的电话号码，当前蜂窝网络信息，
+	任何正在进行的通话的状态，以及在设备上注册的任何PhoneAccount列表 -->
+    <!-- 注意：如果您的minSdkVersion和targetSdkVersion值都设置为3或更低，
+	系统会向您的应用程序隐式授予此权限。如果您不需要此权限，请确保您的targetSdkVersion为4或更高。-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 允许应用程序发起电话呼叫，而无需通过拨号器用户界面让用户确认呼叫. -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!-- Allows an application to read the user's call log. -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <!-- Allows an application to write (but not read) the user's call log data.-->
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+    <!-- 允许应用程序向系统中添加语音邮件-->
+    <uses-permission android:name="android.permission.ADD_VOICEMAIL"/>
+    <!-- Allows an application to use SIP service. 会话发起协议 -->
+    <uses-permission android:name="android.permission.USE_SIP"/>
+    <!-- 允许应用程序查看在拨出呼叫期间拨打的号码，以及将呼叫重定向到其他号码或完全中止该呼叫的选项。-->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+
+    <!-- 用于与访问摄像头或从设备捕获图像/视频相关联的权限。 -->
+    <permission-group android:name="android.permission-group.SENSORS"/>
+    <!-- 允许应用程序访问来自传感器的数据，用户使用这些传感器来测量他/她身体内部发生的情况，例如心率。 -->
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+
+    <!-- 用于与用户的SMS消息相关的运行时权限 -->
+    <permission-group android:name="android.permission-group.SMS"/>
+    <!-- Allows an application to send SMS messages. -->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!-- Allows an application to receive SMS messages. -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!-- Allows an application to read SMS messages. -->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <!-- 允许应用程序接收WAP推式消息。-->
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH"/>
+    <!-- 允许应用程序监视传入的彩信。-->
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+
+    <!--用于与共享外部存储相关的运行时权限。 -->
+    <permission-group android:name="android.permission-group.STORAGE"/>
+    <!-- 允许应用程序从外部存储设备读取。 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 允许应用程序写入外部存储。-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- 表 1. 危险权限和权限组。=========================================================  End    -->
+
+	<uses-feature android:name="android.hardware.camera" />
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
+
+</manifest>

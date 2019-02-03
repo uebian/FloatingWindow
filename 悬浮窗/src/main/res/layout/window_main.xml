@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yzrilyzr.ui.myLinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:orientation="vertical">
+
+	<com.yzrilyzr.icondesigner.VecView
+		android:layout_height="25dp"
+		android:layout_width="25dp"
+		vec="floatingwindow"
+		android:id="@+id/mainwindowButton5"
+		android:visibility="gone"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center"
+		android:id="@+id/mainTitleBar">
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			android:layout_margin="2dp"
+			vec="floatingwindow"
+			android:id="@+id/mainwindowImageView1"/>
+
+		<com.yzrilyzr.ui.myTextViewBack
+			android:layout_height="25dp"
+			android:text="New Window"
+			android:gravity="left|center"
+			android:layout_width="wrap_content"
+			android:id="@+id/mainwindowTextView1"
+			android:layout_weight="1.0"
+			android:singleLine="true"
+			android:ellipsize="end"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			vec=""
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			android:visibility="gone"
+			android:id="@+id/mainwindowAddButton"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			vec=""
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			android:visibility="gone"
+			android:id="@+id/mainwindowButton1"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			vec="minwin"
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			android:id="@+id/mainwindowButton2"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			vec="maxwin"
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			android:id="@+id/mainwindowButton3"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			vec="closewin"
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			android:id="@+id/mainwindowButton4"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myLinearLayoutBack
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_marginLeft="4dp"
+		android:layout_marginRight="4dp"
+		android:layout_marginBottom="4dp"
+		android:orientation="vertical"
+		android:id="@+id/mainContent"/>
+
+</com.yzrilyzr.ui.myLinearLayout>
+

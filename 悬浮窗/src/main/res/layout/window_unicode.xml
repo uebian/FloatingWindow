@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_weight="1.0">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:hint="请输入需要转换的文本"
+			android:layout_margin="5dp"
+			android:layout_weight="1.0"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="编码"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="解码"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="复制"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="粘贴"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="清空"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_weight="1.0">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:hint="转换后的文本将会出现在这"
+			android:layout_margin="5dp"
+			android:layout_weight="1.0"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="二次转换"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"
+				android:layout_margin="5dp"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="复制内容"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"
+				android:layout_margin="5dp"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

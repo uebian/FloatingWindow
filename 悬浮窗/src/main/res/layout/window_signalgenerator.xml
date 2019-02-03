@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="示波器"
+			android:id="@+id/windowsignalgeneratormyButton1"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="使用曲谱生成:"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			vec="open"
+			android:id="@+id/windowsignalgeneratorVecView1"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			vec="play"
+			android:id="@+id/windowsignalgeneratorVecView2"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:gravity="center">
+
+	<com.yzrilyzr.icondesigner.VecView
+		android:layout_height="70dp"
+		vec="ct/user"
+		android:layout_width="70dp"
+		android:layout_marginTop="10dp"/>
+
+	<com.yzrilyzr.ui.myEditText
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:maxLines="1"
+		android:layout_margin="10dp"
+		android:hint="ID"
+		android:inputType="number"/>
+
+	<com.yzrilyzr.ui.myEditText
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:maxLines="1"
+		android:hint="Password"
+		android:inputType="textPassword"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"/>
+
+	<com.yzrilyzr.ui.myButton
+		android:layout_height="wrap_content"
+		android:text="登录"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dp"/>
+
+	<View
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="bottom|center">
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:text="连接服务器…"
+			android:layout_width="wrap_content"/>
+
+		<com.yzrilyzr.ui.myLoadingView
+			android:layout_height="30dp"
+			android:layout_width="30dp"/>
+
+		<RelativeLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:text="配置"
+			android:clickable="true"
+			android:layout_width="wrap_content"
+			android:layout_marginRight="10dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:text="注册"
+			android:clickable="true"
+			android:layout_width="wrap_content"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

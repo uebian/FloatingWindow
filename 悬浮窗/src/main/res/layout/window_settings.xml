@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	android:focusable="true"
+	android:focusableInTouchMode="true">
+
+	<LinearLayout
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:orientation="vertical"
+		android:padding="5dp">
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="窗口设置"
+			android:layout_width="360dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp"
+			android:clickable="true"
+			android:id="@+id/windowsettingsLinearLayout1">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="窗口层级"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="20dp"
+				vec="forward"
+				android:layout_width="20dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="允许窗口超出屏幕边界"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch1"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="程序设置"
+			android:layout_width="360dp"
+			android:layout_marginTop="40dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="开鸡启动"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch3"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="显示通知栏"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch6"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="使用JS辅助"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch2"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="ANR检测(防止程序死循环)"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch5"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="启用Xposed模块"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch7"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="debug模式"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch8"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp"
+			android:clickable="true"
+			android:id="@+id/windowsettingsLinearLayout2">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="崩溃处理方式"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="20dp"
+				vec="forward"
+				android:layout_width="20dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="系统设置"
+			android:layout_width="360dp"
+			android:layout_marginTop="40dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="USB调试模式"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowsettingsmySwitch4"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</ScrollView>
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center"
+		android:id="@+id/windowabmusicLinearLayout1">
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="file"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="rectwave"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="match_parent"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:gravity="left|center"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="music"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="menu"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.floatingwindow.view.PianoRoll
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0"
+		android:id="@+id/windowabmusicPianoRoll1"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:id="@+id/windowabmusicLinearLayout2">
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="back"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="forward"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="play"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="match_parent"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:gravity="left|center"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="edit"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="copy"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="35dp"
+			android:layout_width="35dp"
+			vec="paste"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

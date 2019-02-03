@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<com.yzrilyzr.ui.myTextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="调整大小:"/>
+
+	<com.yzrilyzr.ui.mySeekBar
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/windowexplorersortSeekBar1"/>
+
+	<RadioGroup
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myRadioButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowexplorersortmyRadioButton1"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="详情"/>
+
+		<com.yzrilyzr.ui.myRadioButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowexplorersortmyRadioButton2"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="列表"/>
+
+		<com.yzrilyzr.ui.myRadioButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowexplorersortmyRadioButton3"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="图标"/>
+
+	</RadioGroup>
+
+	<com.yzrilyzr.ui.myLinearLayout
+		android:layout_height="1px"
+		android:layout_width="match_parent"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout1">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sortnameup"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="名称升序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout2">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sorttypeup"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="类型升序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout3">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sortsizeup"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="大小升序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout4">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sorttimeup"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="时间升序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myLinearLayout
+		android:layout_height="1px"
+		android:layout_width="match_parent"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout5">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sortnamedown"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="名称降序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout6">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sorttypedown"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="类型降序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout7">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sortsizedown"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="大小降序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:id="@+id/windowexplorersortLinearLayout8">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				vec="sorttimedown"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="时间降序"
+				android:layout_marginTop="5dp"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

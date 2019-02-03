@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:orientation="vertical">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:maxLines="3"
+			android:hint="在 所有组 中搜索…"
+			android:id="@+id/windowsimpledatabasemyEditText1"/>
+
+		<com.yzrilyzr.ui.myListView
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:id="@+id/windowsimpledatabaseListView1"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myFab
+		android:layout_height="50dp"
+		android:layout_width="50dp"
+		android:layout_gravity="bottom|right"
+		vec="add"
+		android:layout_margin="10dp"
+		android:id="@+id/windowsimpledatabasemyFab1"/>
+
+	<com.yzrilyzr.ui.myFab
+		android:layout_height="40dp"
+		android:layout_width="40dp"
+		android:layout_gravity="bottom|right"
+		vec="loadout"
+		android:id="@+id/windowsimpledatabasemyFab2"
+		android:layout_marginBottom="70dp"
+		android:layout_marginRight="15dp"/>
+
+</FrameLayout>
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:gravity="center">
+
+	<com.yzrilyzr.icondesigner.VecView
+		android:layout_height="30dp"
+		android:layout_width="30dp"
+		vec="sinewave"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="vertical"
+		android:layout_weight="1.0">
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.floatingwindow.view.FloatPicker
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:id="@+id/windowsignalentryFloatPicker1"/>
+
+	<com.yzrilyzr.icondesigner.VecView
+		android:layout_height="30dp"
+		android:layout_width="30dp"
+		vec="closewin"
+		android:id="@+id/windowsignalentryVecView1"/>
+
+</LinearLayout>
+

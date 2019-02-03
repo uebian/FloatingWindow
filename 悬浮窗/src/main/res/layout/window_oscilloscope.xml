@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<com.yzrilyzr.floatingwindow.view.OscilloscopeView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:text="信号源"/>
+
+		<com.yzrilyzr.ui.mySpinner
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowoscilloscopemySpinner1"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center">
+
+			<com.yzrilyzr.floatingwindow.view.FloatPicker
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowoscilloscopeFloatPicker1"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="扫描频率(Hz)"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1.0"
+			android:gravity="center">
+
+			<com.yzrilyzr.floatingwindow.view.FloatPicker
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowoscilloscopeFloatPicker2"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="增益"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

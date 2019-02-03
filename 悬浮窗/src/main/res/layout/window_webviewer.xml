@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="wrap_content"
+			android:inputType="textUri"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:hint="搜索或输入网址"
+			android:singleLine="true"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="30dp"
+			vec="find"
+			android:layout_width="40dp"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myProgressBar
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:visibility="gone"/>
+
+	<android.webkit.WebView
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0"/>
+
+	<LinearLayout
+		android:layout_height="30dp"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="back"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="forward"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="refresh"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="closewin"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

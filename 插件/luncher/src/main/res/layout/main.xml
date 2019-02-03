@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center"
+	android:orientation="vertical">
+
+	<TextView
+		android:text="本插件是针对找不到FW桌面图标而制作的\n找不到桌面图标一般有以下原因:\n1、FW不支持当前系统\n2、FW被修改\n3、操作系统故障\n…"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+
+	<TextView
+		android:text="检测结果:"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="24dp"
+		android:id="@+id/mainTextView1"/>
+
+</LinearLayout>
+

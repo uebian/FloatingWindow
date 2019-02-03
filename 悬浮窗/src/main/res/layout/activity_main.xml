@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<com.yzrilyzr.ui.myLinearLayoutBack
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_marginBottom="171dp">
+
+		<com.yzrilyzr.ui.myTabLayout
+			android:layout_width="match_parent"
+			items="前言,权利声明,许可范围,权利限制,用户使用须知,免责与责任限制,法律及争议解决,其他条款"
+			android:layout_height="wrap_content"
+			android:id="@+id/activitymainmyTabLayout1"/>
+
+		<com.yzrilyzr.ui.myViewPager
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/activitymainmyViewPager1"/>
+
+	</com.yzrilyzr.ui.myLinearLayoutBack>
+
+	<com.yzrilyzr.ui.myToolBar
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		title="软件许可使用协议"
+		vec0="floatingwindow"
+		tip0="悬浮窗"/>
+
+	<com.yzrilyzr.icondesigner.VecView
+		android:layout_height="161dp"
+		vec="yzrilyzr"
+		android:layout_width="350dp"
+		android:layout_gravity="bottom|right"
+		android:layout_margin="5dp"/>
+
+</FrameLayout>
+

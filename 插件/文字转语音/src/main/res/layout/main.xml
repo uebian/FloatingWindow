@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<com.yzrilyzr.ui.myEditText
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0"
+		android:id="@+id/mainEditText1"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="粘贴播放"
+			android:layout_width="match_parent"
+			android:id="@+id/paste"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="播放"
+			android:layout_width="match_parent"
+			android:id="@+id/speak"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="停止"
+			android:layout_width="match_parent"
+			android:id="@+id/stop"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="释放"
+			android:layout_width="match_parent"
+			android:id="@+id/release"
+			android:layout_weight="1.0"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myTextView
+		android:layout_height="wrap_content"
+		android:text="说话人(0-4),音量,语速,音调"
+		android:layout_width="match_parent"/>
+
+	<com.yzrilyzr.ui.mySeekBar
+		android:layout_height="wrap_content"
+		android:max="4"
+		android:progress="0"
+		android:layout_width="match_parent"
+		android:id="@+id/mainmySeekBar1"/>
+
+	<com.yzrilyzr.ui.mySeekBar
+		android:layout_height="wrap_content"
+		android:max="9"
+		android:progress="9"
+		android:layout_width="match_parent"
+		android:id="@+id/mainmySeekBar2"/>
+
+	<com.yzrilyzr.ui.mySeekBar
+		android:layout_height="wrap_content"
+		android:max="9"
+		android:progress="5"
+		android:layout_width="match_parent"
+		android:id="@+id/mainmySeekBar3"/>
+
+	<com.yzrilyzr.ui.mySeekBar
+		android:layout_height="wrap_content"
+		android:max="9"
+		android:progress="5"
+		android:layout_width="match_parent"
+		android:id="@+id/mainmySeekBar4"/>
+
+</LinearLayout>
+

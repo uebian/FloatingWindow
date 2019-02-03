@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="50dp"
+			android:layout_width="50dp"
+			vec="ct/user"
+			android:clickable="false"
+			android:layout_margin="5dp"
+			android:id="@+id/ctmeVecView1"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_margin="5dp"
+			android:layout_weight="1.0">
+
+			<com.yzrilyzr.ui.myTextViewTitle
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:maxLines="1"
+				android:ellipsize="end"
+				android:id="@+id/ctmemyTextViewRitle1"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:maxLines="1"
+				android:ellipsize="end"
+				android:layout_marginTop="5dp"
+				android:id="@+id/ctmemyTextView1"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="25dp"
+			android:layout_width="25dp"
+			vec="forward"
+			android:clickable="false"
+			android:layout_margin="5dp"
+			android:layout_gravity="center"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

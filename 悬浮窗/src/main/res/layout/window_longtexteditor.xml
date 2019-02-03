@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<HorizontalScrollView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="open"
+				android:id="@+id/windowlongtexteditorVecView1"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="save"
+				android:id="@+id/windowlongtexteditorVecView2"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="find"
+				android:id="@+id/windowlongtexteditorVecView3"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="edit"
+				android:id="@+id/windowlongtexteditorVecView4"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="symbol"
+				android:id="@+id/windowlongtexteditorVecView5"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="highlightoff"
+				android:id="@+id/windowlongtexteditorVecView6"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="undo"
+				android:id="@+id/windowlongtexteditorVecView7"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="redo"
+				android:id="@+id/windowlongtexteditorVecView8"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="settings"
+				android:id="@+id/windowlongtexteditorVecView9"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="play"
+				android:id="@+id/windowlongtexteditorVecView14"
+				android:visibility="gone"/>
+
+		</LinearLayout>
+
+	</HorizontalScrollView>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:id="@+id/mainLinearLayout2"
+		android:visibility="gone">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"
+				android:id="@+id/mainEditText1"
+				android:maxLines="5"
+				android:padding="3dp"
+				android:layout_margin="3dp"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="findup"
+				android:id="@+id/windowlongtexteditorVecView10"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="finddown"
+				android:id="@+id/windowlongtexteditorVecView11"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal">
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"
+				android:id="@+id/mainEditText2"
+				android:maxLines="5"
+				android:padding="3dp"
+				android:layout_margin="3dp"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="replace"
+				android:id="@+id/windowlongtexteditorVecView12"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="all"
+				android:id="@+id/windowlongtexteditorVecView13"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.longtexteditor.LongTextView
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:id="@+id/mainLongTextView1"
+		android:layout_weight="1.0"/>
+
+	<HorizontalScrollView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:scrollbars="none"
+		android:id="@+id/mainHorizontalScrollView1">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="horizontal"
+			android:id="@+id/mainLinearLayout1"/>
+
+	</HorizontalScrollView>
+
+</LinearLayout>
+

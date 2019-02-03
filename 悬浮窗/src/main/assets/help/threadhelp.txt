@@ -1,0 +1,9 @@
+main：就是我们说所知道的主线程ActivityThread，我们应用的事件分发、UI更新都是在这里面做的。
+GC：Garbage Collector，虚拟机的垃圾收集线程，在2.3之前都是串行GC，没有这个线程，2.3之后才改成了并行GC。
+Signal  Catcher：捕获并处理Linux的信号。
+JDWP：Java Debug Wire Protocal，这个线程是进行调试用的服务线程。
+Compiler：我们知道现在的虚拟机对部分代码进行编译运行的，这个线程就是JIT即使编译器线程。
+ReferenceQueueDaemon：引用队列守护线程。我们知道，在创建引用对象的时候，可以关联一个队列。当被引用对象引用的对象被GC回收的时候，被引用对象就会被加入到其创建时关联的队列去。这个加入队列的操作就是由ReferenceQueueDaemon守护线程来完成的。这样应用程序就可以知道哪些被引用的对象已经被回收了。
+FinalizerDaemon：析构守护线程。对于重写了成员函数finalize的对象，它们被GC决定回收时，并没有马上被回收，而是被放入到一个队列中，等待FinalizerDaemon守护线程去调用它们的成员函数finalize，然后再被回收。
+FinalizerWatchdogDaemon：析构监护守护线程。用来监控FinalizerDaemon线程的执行。一旦检测那些重写了finalize的对象在执行成员函数finalize时超出一定时间，那么就会退出VM。
+Binder_1,Binder_2：应用使用binder进行进程间通信时使用。

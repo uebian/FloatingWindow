@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content"
+	android:layout_width="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:gravity="center">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="链接"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:layout_weight="1.0"
+				android:id="@+id/windowwebviewerdownloadmyEditText1"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="下载位置"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:layout_weight="1.0"
+				android:id="@+id/windowwebviewerdownloadmyEditText2"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="horizontal"
+		android:layout_weight="1.0"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myProgressBar
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:id="@+id/windowwebviewerdownloadmyProgressBar1"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			vec="play"
+			android:layout_margin="3dp"
+			android:id="@+id/windowwebviewerdownloadVecView1"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

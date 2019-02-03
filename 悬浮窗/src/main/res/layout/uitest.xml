@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content"
+	android:orientation="horizontal">
+
+	<Switch
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"/>
+
+	<ScrollView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0">
+
+		<RadioGroup
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical">
+
+			<Button
+				android:layout_height="wrap_content"
+				android:text="Button"
+				android:layout_width="match_parent"/>
+
+			<ImageButton
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+
+			<ToggleButton
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"/>
+
+			<Switch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<CheckBox
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<RadioButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<RadioButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<SeekBar
+				android:layout_height="wrap_content"
+				android:progress="33"
+				android:secondaryProgress="66"
+				android:layout_width="match_parent"/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:text="Text"
+				android:layout_width="match_parent"/>
+
+			<ProgressBar
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<ProgressBar
+				android:layout_height="wrap_content"
+				style="?android:attr/progressBarStyleHorizontal"
+				android:progress="33"
+				android:secondaryProgress="66"
+				android:layout_width="match_parent"/>
+
+			<EditText
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"/>
+
+		</RadioGroup>
+
+	</ScrollView>
+
+	<ScrollView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0">
+
+		<RadioGroup
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical">
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="Button"
+				android:layout_width="match_parent"/>
+
+			<com.yzrilyzr.ui.myImageButton
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+
+			<com.yzrilyzr.ui.myToggleButton
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myCheckBox
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myRadioButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myRadioButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.mySeekBar
+				android:layout_height="wrap_content"
+				android:progress="33"
+				android:secondaryProgress="66"
+				android:layout_width="match_parent"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="Text"
+				android:layout_width="match_parent"/>
+
+			<com.yzrilyzr.ui.myLoadingView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myProgressBar
+				android:layout_height="wrap_content"
+				android:progress="33"
+				android:secondaryProgress="66"
+				android:layout_width="match_parent"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"/>
+
+		</RadioGroup>
+
+	</ScrollView>
+
+</LinearLayout>
+

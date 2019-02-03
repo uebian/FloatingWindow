@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<com.yzrilyzr.connecttogether.BackgroundView
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		type="shape"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:gravity="top|center">
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="60dp"
+			android:layout_width="60dp"
+			vec="ct/user"
+			android:layout_marginTop="30dp"
+			android:id="@+id/ctusercardVecView1"/>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:maxLines="1"
+			android:clickable="true"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:gravity="center"
+			android:ellipsize="end"
+			android:id="@+id/ctusercardmyTextViewTitle1"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:maxLines="3"
+			android:gravity="top|center"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:ellipsize="end"
+			android:id="@+id/ctusercardmyTextView"
+			android:layout_marginTop="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:maxLines="3"
+			android:clickable="true"
+			android:gravity="top|center"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:ellipsize="end"
+			android:id="@+id/ctusercardmyTextView1"
+			android:layout_marginTop="5dp"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="添加好友"
+			android:id="@+id/ctusercardmyButton1"/>
+
+	</LinearLayout>
+
+</FrameLayout>
+

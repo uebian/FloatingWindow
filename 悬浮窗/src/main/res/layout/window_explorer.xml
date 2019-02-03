@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="upparent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="add"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="home"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="find"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="select"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="refresh"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="sort"/>
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="menu"/>
+		
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="left|center">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:maxLines="1"
+			android:layout_weight="1.0"
+			android:id="@+id/windowexplorermyEditText1"/>
+
+		<com.yzrilyzr.ui.myLoadingView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:id="@+id/windowexplorermyLoadingView1"
+			android:visibility="gone"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="32dp"
+			android:layout_width="32dp"
+			vec="forward"
+			android:id="@+id/windowexplorerVecView1"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0">
+
+		<GridView
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:id="@+id/windowexplorerGridLayout1"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="bottom">
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowexplorerTextView1"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowexplorerLinearLayout1"
+			android:visibility="gone">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="all"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="allinv"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="allsec"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				vec="alltype"/>
+
+		</com.yzrilyzr.ui.myLinearLayout>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myLinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:visibility="gone">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:layout_weight="1.0"
+			android:layout_gravity="bottom"
+			android:id="@+id/windowexplorerEditText1"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="40dp"
+			android:text="保存"
+			android:layout_width="55dp"
+			android:layout_gravity="bottom"
+			android:id="@+id/windowexplorerButton1"/>
+
+	</com.yzrilyzr.ui.myLinearLayout>
+
+</LinearLayout>
+

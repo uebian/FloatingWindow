@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yzrilyzr.icondesigner" >
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+		android:largeHeap="true"
+        android:label="图标设计">
+		<activity
+			android:name=".MainActivity"
+			android:launchMode="singleTask"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+			<intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="file"/>
+                <data android:scheme="content"/>
+                <data android:pathPattern=".*\.vec"/>
+                <data android:pathPattern=".*\.VEC"/>
+				<data android:pathPattern=".*\.xml"/>
+                <data android:pathPattern=".*\.XML"/>
+                <data android:mimeType="*/*"/>
+                <data android:host="*"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		style="?android:attr/buttonBarStyle"
+		android:layout_width="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="暂停"
+			android:layout_width="wrap_content"
+			android:id="@+id/playButton1"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="重置"
+			android:layout_width="wrap_content"
+			android:id="@+id/playButton2"/>
+
+		<com.yzrilyzr.ui.myToggleButton
+			android:layout_height="wrap_content"
+			android:textOn="写出"
+			android:layout_width="wrap_content"
+			android:id="@+id/playButton3"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="波形"
+			android:layout_width="wrap_content"
+			android:id="@+id/playButton4"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="音轨"
+			android:layout_width="wrap_content"
+			android:id="@+id/playButton5"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="控制"
+			android:layout_width="wrap_content"
+			android:id="@+id/playButton6"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myCheckBox
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/playCheckBox1"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:text="进度"
+			android:layout_width="wrap_content"/>
+
+		<com.yzrilyzr.ui.mySeekBar
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/playSeekBar1"
+			android:layout_weight="1.0"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

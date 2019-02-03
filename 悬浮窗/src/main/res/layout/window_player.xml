@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:layout_weight="1.0">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:maxLines="1"
+				android:id="@+id/musicplayerartist"
+				android:layout_margin="3dp"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:maxLines="1"
+				android:id="@+id/musicplayername"
+				android:layout_margin="3dp"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:maxLines="1"
+				android:id="@+id/musicplayeralbum"
+				android:layout_margin="3dp"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:layout_margin="3dp"
+			vec="edit"
+			android:id="@+id/windowplayerEdit"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_weight="1.0"
+		android:gravity="center">
+
+		<ImageView
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:id="@+id/windowplayerImageView1"
+			android:scaleType="fitCenter"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.mySeekBar
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/musicplayerSeekBar1"
+		android:layout_margin="3dp"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:text="00:00"
+			android:layout_width="wrap_content"
+			android:id="@+id/musicplayerTextView1"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:layout_margin="3dp"
+			android:typeface="monospace"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:layout_margin="3dp"
+			vec="round"
+			android:id="@+id/musicplayerImageButton1"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			vec="prev"
+			android:layout_margin="3dp"
+			android:id="@+id/musicplayerImageButton2"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			vec="pause"
+			android:layout_margin="3dp"
+			android:id="@+id/musicplayerImageButton3"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:layout_margin="3dp"
+			vec="next"
+			android:id="@+id/musicplayerImageButton4"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:layout_margin="3dp"
+			android:id="@+id/musicplayerImageButton5"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:text="00:00"
+			android:layout_width="wrap_content"
+			android:id="@+id/musicplayerTextView2"
+			android:layout_weight="1.0"
+			android:gravity="center"
+			android:layout_margin="3dp"
+			android:typeface="monospace"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

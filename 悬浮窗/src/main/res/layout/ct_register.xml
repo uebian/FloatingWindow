@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center">
+
+	<com.yzrilyzr.ui.myEditText
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:maxLines="1"
+		android:layout_margin="10dp"
+		android:hint="密码"
+		android:inputType="textPassword"/>
+
+	<com.yzrilyzr.ui.myEditText
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:maxLines="1"
+		android:hint="确认密码"
+		android:inputType="textPassword"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:layout_marginTop="10dp">
+
+		<com.yzrilyzr.ui.myEditText
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:maxLines="1"
+			android:hint="验证码(点击更换)"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_weight="1.0"/>
+
+		<ImageView
+			android:layout_height="30dp"
+			android:layout_width="60dp"
+			android:layout_marginRight="10dp"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myButton
+		android:layout_height="wrap_content"
+		android:text="注册"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dp"/>
+
+</LinearLayout>
+
