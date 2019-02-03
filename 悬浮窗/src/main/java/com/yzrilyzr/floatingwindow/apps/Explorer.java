@@ -110,6 +110,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			sdcard=VECfile.createBitmap(ctx,"sdcard",d,d),
 			android=VECfile.createBitmap(ctx,"android",d,d),
 			ftp=VECfile.createBitmap(ctx,"ftp",d,d),
+			sync=VECfile.createBitmap(ctx,"sync",d,d),
 			removeable=VECfile.createBitmap(ctx,"removeable",d,d);
 
 			@Override
@@ -184,6 +185,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 					String f=(String)o;
 					name=f;
 					if(f.contains("ftp://"))vec=ftp;
+					else if(f.contains("sync:"))vec=sync;
 					else if(f.contains("http://")||f.contains("https://"))vec=internet;
 					((View)holder.icon.getParent()).setBackgroundColor(selected.contains(f)?uidata.ACCENT:0);
 				}
@@ -820,7 +822,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			}
 			else if(s.contains("https://")||s.contains("http://"))
 				API.startService(ctx,new Intent().putExtra("url",s),cls.WEBVIEWER);
-
+			else if(s.contains("sync:"));
 		}
 		setSearchMode(false);
 	}
@@ -874,6 +876,36 @@ Window.OnButtonDown,Window.OnSizeChanged
 				}
 				else if(path==null&&!searchmode)
 				{
+					if(p2==0){
+						myDialog.Builder builder = new myDialog.Builder(ctx);
+						builder.setTitle("编辑快捷方式");
+						final myEditText edi=new myEditText(ctx);
+						edi.setHint("路径");
+						edi.setText(g.getPath());
+						builder.setView(edi);
+						builder.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+							@Override
+							public void onClick(DialogInterface d,int p)
+							{
+								try
+								{
+									Set<String> s=util.getSPRead().getStringSet("explorershortcuts",new TreeSet<String>());
+									TreeSet<String> ss=new TreeSet<String>();
+									for(String l:s)ss.add(l);
+									ss.remove(g.getPath());
+									ss.add(edi.getText()+"");
+									util.getSPWrite().putStringSet("explorershortcuts",ss).commit();
+									list();
+								}
+								catch(Exception e)
+								{
+									util.toast("编辑失败");
+									e.printStackTrace();
+								}
+							}});
+						builder.setNegativeButton("取消",null);
+						builder.show();
+					}
 					if(p2==1)
 					{
 						Set<String> s=util.getSPRead().getStringSet("explorershortcuts",new TreeSet<String>());
@@ -886,8 +918,8 @@ Window.OnButtonDown,Window.OnSizeChanged
 					}
 					else if(p2==2)
 					{
-						if(!select)API.startService(ctx,new Intent().putExtra("path",g.getAbsolutePath()),cls.EXPLORER);
-						else for(mFile gg:selected)API.startService(ctx,new Intent().putExtra("path",gg.getAbsolutePath()),cls.EXPLORER);
+						if(!select)API.startService(ctx,new Intent().putExtra("path",g.getPath()),cls.EXPLORER);
+						else for(mFile gg:selected)API.startService(ctx,new Intent().putExtra("path",gg.getPath()),cls.EXPLORER);
 					}
 				}
 				else if(g.isFile()||select)
@@ -1365,7 +1397,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			Set<String> set=util.getSPRead().getStringSet("explorershortcuts",null);
 			if(set!=null)for(String s:set)
 				{
-					if(s.contains("ftp://")||s.contains("https://")||s.contains("http://"))l.add(s);
+					if(s.contains("ftp://")||s.contains("https://")||s.contains("http://")||s.contains("sync:"))l.add(s);
 					else l.add(new mFile(s));
 				}
         }
@@ -1563,6 +1595,12 @@ Window.OnButtonDown,Window.OnSizeChanged
 			this(f.getAbsolutePath());
 		}
 
+		@Override
+		public String getPath()
+		{
+			// TODO: Implement this method
+			return path;
+		}
 		@Override
 		public boolean setWritable(boolean writable, boolean ownerOnly)
 		{

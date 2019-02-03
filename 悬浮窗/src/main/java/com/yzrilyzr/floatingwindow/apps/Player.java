@@ -72,7 +72,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 		.show();
 		myTabLayout t=new myTabLayout(c);
 		myViewPager v=new myViewPager(c);
-		t.setItems("正在播放","队列","歌曲","文件夹","播放列表","调音","搜索");
+		t.setItems("正在播放","队列","歌曲","文件夹","播放列表","调音");
 		t.setViewPager(v);
 		v.setTabLayout(t);
 		w.addView(t);
@@ -289,7 +289,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 	@Override
 	public void onButtonDown(int code)
 	{
-		if(code==Window.ButtonCode.CLOSE)
+		if(code==Window.ButtonCode.CLOSE&&mp!=null)
 		{
 			mp.stop();
 			mp.release();
