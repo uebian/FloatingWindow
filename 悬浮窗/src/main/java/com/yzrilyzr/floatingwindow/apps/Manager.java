@@ -298,7 +298,9 @@ public class Manager implements Runnable,Window.OnButtonDown
 			if(position<apps.size())
 			{
 				ApplicationInfo ap=apps.get(position);
+				try{
 				holder.v[0].setImageDrawable(ap.loadIcon(ctx.getPackageManager()));
+				}catch(Throwable e){}
 				holder.text.setText(ap.loadLabel(ctx.getPackageManager()));
 				holder.v[1].setOnClickListener(new Cl3(position));
 				holder.v[1].setImageVec(whitelist.contains(ap.packageName)?"lock":"unlock");

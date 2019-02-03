@@ -143,7 +143,12 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 		b.setColor(c);
 		return this;
 	}
-
+	public Window setBColor(int c)
+	{
+		Back b=(Window.Back)winView.getBackground();
+		b.setBcolor(c);
+		return this;
+	}
 	public boolean isCanFocus()
 	{
 		return canFocus;
@@ -804,6 +809,16 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 			this.radius=util.px(uidata.UI_RADIUS);
 			paint=new Paint(Paint.ANTI_ALIAS_FLAG);
 		}
+
+		public void setBcolor(int bcolor)
+		{
+			this.bcolor = bcolor;
+		}
+
+		public int getBcolor()
+		{
+			return bcolor;
+		}
 		public void setMargin(int margin)
 		{
 			this.margin = margin;
@@ -854,12 +869,13 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 		{
 			paint.setColor(color);
 			canvas.drawRoundRect(rectF,radius,radius,paint);
-			if(!minwin){
-			paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-			paint.setColor(uidata.BACK);
-			canvas.drawRect(rectF2,paint);
-			paint.setXfermode(null);
-			canvas.drawRect(rectF2,paint);
+			if(!minwin)
+			{
+				paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+				paint.setColor(bcolor);
+				canvas.drawRect(rectF2,paint);
+				paint.setXfermode(null);
+				canvas.drawRect(rectF2,paint);
 			}
 			//int sc=canvas.saveLayer(rectF,paint2,Canvas.ALL_SAVE_FLAG);
 			//canvas.clipRect(rectF);

@@ -1,6 +1,304 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
-    
-</LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="欢迎使用悬浮窗！"
+			android:gravity="center"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="这里将会展示一些操作技巧"
+			android:layout_margin="10dp"/>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="§1 窗口"
+			android:layout_width="360dp"
+			android:layout_marginTop="20dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="基本窗口如下图所示"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="最上面是标题栏，可以拖动"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="标题栏内从左到右依次是 图标 标题 最小化 最大化 关闭"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="(长按按钮可能会有不同的功能哦)"
+			android:layout_margin="5dp"/>
+
+		<include
+			layout="@layout/window_main"
+			android:layout_width="200dp"
+			android:layout_height="200dp"
+			android:layout_gravity="center"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="边框内为窗口内容，可以与窗口互动"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="左 右 下的边框，按住然后根据提示可以改变窗口大小"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="当您点击最小化后，窗口将变成一个可以拖动的按钮，点击该按钮还原窗口"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="当您点击最大化后，窗口将铺满屏幕，此时点击还原按钮即可还原"
+			android:layout_margin="5dp"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="还原:"
+				android:layout_margin="5dp"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="30dp"
+				vec="restorewin"
+				android:layout_width="30dp"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="§2 主启动按钮"
+			android:layout_width="360dp"
+			android:layout_marginTop="20dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="轻触主启动按钮，您将看到扇形展开和圆形蹦出(下图图标未画出)"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.icondesigner.VecView
+			android:layout_height="200dp"
+			vec="starterv"
+			android:layout_width="200dp"
+			android:layout_gravity="center"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="点击‘+’号添加快捷启动"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="点击中心圆打开程序列表"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="点击扇形区的快捷启动或按住滑动至该快捷启动，即可选择启动该程序"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="点击或按住滑动到扇形区外来关闭快捷启动"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="长按已添加的快捷启动以重新选择快捷启动"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="长按主启动按钮，您可以打开本程序的github界面"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="§3 通知栏"
+			android:layout_width="360dp"
+			android:layout_marginTop="20dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="点击通知栏里的消息可以快捷的关闭本程序"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="§4 无障碍服务 (Accessibility)"
+			android:layout_width="360dp"
+			android:layout_marginTop="20dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="我们开发此功能的目的是防止恶意插件损害您的设备(包括锁机之类)"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="使用组合键关闭本程序(注意关闭后一段时间底部按键会失灵)"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="这个功能仅用于测试未知来源的插件"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="详情请在 无障碍服务(Accessibility)→悬浮窗 中查看"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="§5 安全模式"
+			android:layout_width="360dp"
+			android:layout_marginTop="20dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="当程序启动时出现以下界面"
+			android:layout_margin="5dp"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_gravity="center">
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="180dp"
+				vec="octocat"
+				android:layout_width="180dp"
+				android:layout_gravity="center"/>
+
+			<com.yzrilyzr.ui.myTextViewTitle
+				android:layout_height="wrap_content"
+				android:text="悬浮窗"
+				android:gravity="center"
+				android:layout_width="match_parent"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="37dp"
+				vec="yzrilyzr"
+				android:layout_width="80dp"
+				android:layout_gravity="right"/>
+
+			<com.yzrilyzr.ui.myLoadingView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:layout_gravity="center"/>
+
+		</LinearLayout>
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="点击章鱼猫即可进入安全模式"
+			android:layout_margin="5dp"/>
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="进入安全模式，悬浮窗的某些设置将被重置"
+			android:layout_margin="5dp"/>
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="包括颜色主题设置和窗口设置，开启ANR检测"
+			android:layout_margin="5dp"/>
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<com.yzrilyzr.ui.myTextViewTitle
+			android:layout_height="wrap_content"
+			android:text="更多内容\n请 长按主启动按钮→github→wiki"
+			android:layout_width="360dp"
+			android:layout_marginTop="20dp"/>
+
+	</LinearLayout>
+
+</ScrollView>
+

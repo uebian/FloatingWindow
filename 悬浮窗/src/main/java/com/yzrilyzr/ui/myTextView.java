@@ -22,7 +22,7 @@ public class myTextView extends android.widget.TextView
 		this.type=type;
 		setTextColor(isEnabled()?(type==DEF||type==TITLE?uidata.TEXTMAIN:uidata.TEXTBACK):uidata.getEFColor());
 		if(uidata.UI_USETYPEFACE)setTypeface(uidata.UI_TYPEFACE);
-		getPaint().setTextSize(util.px(type==DEF||type==BACK?uidata.TEXTSIZE:uidata.TEXTSIZE*1.2f));
+		getPaint().setTextSize(util.px(type==DEF||type==BACK?uidata.TEXTSIZE:uidata.TEXTSIZE*1.5f));
 	}
 
 	@Override

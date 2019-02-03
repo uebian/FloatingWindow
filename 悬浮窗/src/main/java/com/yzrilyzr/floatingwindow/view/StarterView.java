@@ -19,17 +19,17 @@ public class StarterView extends View
     private Paint paint;
     private int progress=0;
     private boolean open=false,isAnim=false,longcli=false,selmoved=false;
-    private static final float dd=util.px(50),ee=util.px(40);
+    private static float dd=util.px(50),ee=util.px(40);
     private float margin;
     private float kx,ky;
     private Listener listener;
-    private static final Bitmap[] bmp=new Bitmap[6];
+    private static Bitmap[] bmp=new Bitmap[6];
     private RectF rect;
 	private long longclick;
-	private static final float arc=(float)(Math.PI/180f);
+	private  float arc=(float)(Math.PI/180f);
 	private int SEL=-1,lSel;
-	private static final String[] tip=new String[]{"添加程序","添加程序","添加程序","菜单","退出"};
-	private static final String[] pkg=new String[4],
+	private static String[] tip=new String[]{"添加程序","添加程序","添加程序","菜单","退出"};
+	private static String[] pkg=new String[4],
 							cls=new String[4];
 	public StarterView(Context c)
     {
@@ -74,7 +74,7 @@ public class StarterView extends View
 					b=Base64.decodeBase64(b);
 					bmp[i]=BitmapFactory.decodeByteArray(b,0,b.length);
 					if(bmp[i]==null)bmp[i]=VECfile.createBitmap(ctx,"add",(int)ee,(int)ee);
-					else bmp[i]=scale(bmp[i]);
+					else bmp[i]=bmp[i];
 				}
 				else bmp[i]=VECfile.createBitmap(ctx,"add",(int)ee,(int)ee);
 			}
@@ -82,12 +82,7 @@ public class StarterView extends View
 			{}
 		}
 	}
-    private static Bitmap scale(Bitmap b)
-    {
-        Matrix Matrix=new Matrix();
-        Matrix.postScale(ee/(float)b.getWidth(),ee/(float)b.getHeight());
-        return Bitmap.createBitmap(b,0,0,b.getWidth(),b.getHeight(),Matrix,false);
-    }
+    
     public void open()
     {
 		if(uidata.UI_USETYPEFACE)paint.setTypeface(uidata.UI_TYPEFACE);
@@ -121,6 +116,8 @@ public class StarterView extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
+		dd=util.px(50);
+		ee=util.px(40);
 		paint.setColor(uidata.BACK);
 		paint.setShadowLayer(margin,0,margin/3,0x50000000);
 		canvas.drawArc(rect,-180,Math.min(progress,225),true,paint);
@@ -136,7 +133,10 @@ public class StarterView extends View
 			if(progress>=45*(i+1))
 			{
 				double d=arc*(22.5+45*i);
-				canvas.drawBitmap(bmp[i],(float)(kx-Math.cos(d)*R2)-ee/2,(float)(ky-Math.sin(d)*R2)-ee/2,paint);
+				Matrix Matrix=new Matrix();
+				Matrix.postScale(ee/(float)bmp[i].getWidth(),ee/(float)bmp[i].getHeight());
+				Matrix.postTranslate((float)(kx-Math.cos(d)*R2)-ee/2,(float)(ky-Math.sin(d)*R2)-ee/2);
+				canvas.drawBitmap(bmp[i],Matrix,paint);
 			}
 		if(progress>=360)
 		{

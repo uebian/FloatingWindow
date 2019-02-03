@@ -35,6 +35,7 @@ public class Load implements Runnable,OnClickListener
 		this.c=ct;
         w=new Window(c,util.px(210),util.px(275))
 			.show()
+			.setCanFocus(false)
 			.setCanResize(false);
 		w.getLayoutParams().type=WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
 		w.dismiss().show().setColor(uidata.BACK);
@@ -93,17 +94,20 @@ public class Load implements Runnable,OnClickListener
 		sa=true;
 		Window w=new Window(c,util.px(60),util.px(25))
 			.show()
+			.setCanFocus(false)
+			.setColor(0x80000000)
+			.setBColor(0)
 			.setPosition(0,util.getScreenHeight()-util.px(30))
 			.setCanResize(false);
 		w.getLayoutParams().type=WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 		w.getLayoutParams().flags=WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 		w.dismiss().show();
+		Window.windowList.remove(w);
 		LinearLayout v=(LinearLayout) w.getMainView();
         v.removeAllViews();
         v.setOnTouchListener(null);
         v.setGravity(Gravity.CENTER);
-        v.setBackgroundColor(0x80000000);
-       	myTextViewTitle tv=new myTextViewTitle(c);
+        myTextViewTitle tv=new myTextViewTitle(c);
         tv.setText("安全模式");
         tv.setGravity(Gravity.CENTER);
         v.addView(tv);

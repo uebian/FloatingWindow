@@ -148,7 +148,7 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 		Thread ct=Thread.currentThread();
 		ct.setName(getString(R.string.app_name));
 		ct.setPriority(Thread.MAX_PRIORITY);
-		String value=null;
+		/*String value=null;
 		try
 		{
             Object roSecureObj = Class.forName("android.os.SystemProperties")
@@ -160,17 +160,18 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 		{
             value = null;
         }
-		if(value==null)throw new RuntimeException("");
+		if(value==null)throw new RuntimeException("");*/
 		if(!util.sup)util.toast("不支持的设备");
 		Thread.setDefaultUncaughtExceptionHandler(this);
 		ct.setUncaughtExceptionHandler(this);
-		if(Resources.getSystem().getDisplayMetrics().density!=3f)
-			Toast.makeText(this,"安全警告:\n不支持的DPI\n您可以在设置中调节显示效果",1).show();
+		//if(Resources.getSystem().getDisplayMetrics().density!=3f)
+			//Toast.makeText(this,"安全警告:\n不支持的DPI\n您可以在设置中调节显示效果",1).show();
 		API.startService(this,cls.LOAD);
 		if(Window.devmode){
 			API.startService(this,cls.CONSOLE);
 			API.startService(this,getPackageName()+".apps.UiTest");
 		}
+		if(util.getSPRead().getBoolean("first",true))API.startService(this,cls.SETTINGS);
     }
 	@Override
 	public void uncaughtException(Thread p1, final Throwable p2)
@@ -319,11 +320,16 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 	{
 		return null;
 	}
+	
 	@Override
 	public void onLowMemory()
 	{
 		super.onLowMemory();
-		util.toast("内存不足");
+		Runtime ru = Runtime.getRuntime();
+		long usable = ru.maxMemory() - ru.totalMemory() + ru.freeMemory();
+		System.gc();
+		long usable2 = ru.maxMemory() - ru.totalMemory() + ru.freeMemory();
+		util.toast("运行内存不足，已清理"+util.getFileSizeStr(usable-usable2));
 	}
 
 }

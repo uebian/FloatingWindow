@@ -96,7 +96,7 @@ public class AboutActivity extends myActivity
 			super.run();
 			try
 			{
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				runOnUiThread(new Runnable(){
 					@Override
 					public void run()
