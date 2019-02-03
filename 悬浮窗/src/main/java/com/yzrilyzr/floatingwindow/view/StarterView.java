@@ -140,7 +140,12 @@ public class StarterView extends View
 			}
 		if(progress>=360)
 		{
-			if(SEL<0||SEL>=tip.length)canvas.drawBitmap(bmp[5],kx-ee/2,ky-ee/2,paint);
+			if(SEL<0||SEL>=tip.length){
+				Matrix Matrix=new Matrix();
+				Matrix.postScale(ee/(float)bmp[5].getWidth(),ee/(float)bmp[5].getHeight());
+				Matrix.postTranslate(kx-ee/2,ky-ee/2);
+				canvas.drawBitmap(bmp[5],Matrix,paint);
+			}
 			else
 			{
 				paint.setColor(uidata.TEXTBACK);
