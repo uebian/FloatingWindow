@@ -22,15 +22,15 @@ import android.content.BroadcastReceiver;
 public class FrontSight implements Window.OnButtonDown,OnClickListener,OnCheckedChangeListener
 {
 	private Window w,w2;
-	private myButton b1;
+	private myButton b1,b4,b5;
 	private myButton b2,b3;
-	private int y=0,color=0xffff5555;
+	private int x=0,y=0,color=0xffff5555;
 	private VecView v;
 	private Context ctx;
 	public FrontSight(Context c,Intent e)
 	{
 		ctx=c;
-		w2=new Window(c,util.px(150),util.px(210))
+		w2=new Window(c,util.px(150),util.px(300))
 		.setTitle("准星")
 		.setIcon("frontsight")
 		.setBar(0,8,0)
@@ -51,7 +51,8 @@ public class FrontSight implements Window.OnButtonDown,OnClickListener,OnChecked
 		v=new VecView(c);
 		a.addView(v);
 		a.setGravity(Gravity.CENTER);
-		y=util.getSPRead("frontsight").getInt("frontsight",0);
+		x=util.getSPRead("frontsight").getInt("frontsightx",0);
+		y=util.getSPRead("frontsight").getInt("frontsighty",0);
 		color=util.getSPRead("frontsight").getInt("frontsightcolor",color);
 		setColor();
 		LinearLayout.LayoutParams p=(LinearLayout.LayoutParams) v.getLayoutParams();
@@ -73,9 +74,17 @@ public class FrontSight implements Window.OnButtonDown,OnClickListener,OnChecked
 		b2.setOnClickListener(this);
 		w2.addView(b2);
 		b3=new myButton(c);
-		b3.setText("设置颜色");
+		b3.setText("←");
 		b3.setOnClickListener(this);
 		w2.addView(b3);
+		b4=new myButton(c);
+		b4.setText("→");
+		b4.setOnClickListener(this);
+		w2.addView(b4);
+		b5=new myButton(c);
+		b5.setText("设置颜色");
+		b5.setOnClickListener(this);
+		w2.addView(b5);
 	}
 
 	@Override
@@ -106,8 +115,9 @@ public class FrontSight implements Window.OnButtonDown,OnClickListener,OnChecked
 	private void setm()
 	{
 		LinearLayout.LayoutParams p=(LinearLayout.LayoutParams) v.getLayoutParams();
-		if(y>0)p.setMargins(0,util.px(y),0,0);
-		if(y<0)p.setMargins(0,0,0,util.px(-y));
+		p.setMargins(util.px(x),util.px(y),0,0);
+		//if(y<0)p.setMargins(0,0,0,util.px(-y));
+		
 		v.setLayoutParams(p);
 	}
 	@Override
@@ -115,7 +125,9 @@ public class FrontSight implements Window.OnButtonDown,OnClickListener,OnChecked
 	{
 		if(p1==b1)y--;
 		else if(p1==b2)y++;
-		else if(p1==b3){
+		else if(p1==b3)x--;
+		else if(p1==b4)x++;
+		else if(p1==b5){
 			API.startServiceForResult(ctx,new Intent().putExtra("color",color),w2,new BroadcastReceiver(){
 				@Override
 				public void onReceive(Context p1, Intent p2)
@@ -127,6 +139,6 @@ public class FrontSight implements Window.OnButtonDown,OnClickListener,OnChecked
 			},cls.COLORPICKER);
 		}
 		setm();
-		if(p1==b1||p1==b2)util.getSPWrite("frontsight").putInt("frontsight",y).commit();
+		if(p1==b1||p1==b2||p1==b3||p1==b4)util.getSPWrite("frontsight").putInt("frontsight",y).commit();
 	}
 }
