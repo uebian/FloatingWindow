@@ -86,7 +86,7 @@ public class Settings implements OnItemClickListener,Window.OnButtonDown
 			LongTextView.suggBackColor=par[12];
 			LongTextView.suggTextColor=par[13];
 			LongTextView.suggLineColor=par[14];
-			util.getSPWrite()
+			util.getSPWrite("longtexteditor")
 				.putInt("text",par[0])
 				.putInt("sel",par[1])
 				.putInt("lback",par[2])

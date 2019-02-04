@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.io.ByteArrayInputStream;
 public class MusicID3
 {
+	public int length=0;
 	public String 
 	TEXT,//: 歌词作者 
 	TENC,//: 编码 
@@ -134,7 +135,7 @@ public class MusicID3
 					String FrameID=new String(data,index,4);
 					index+=4;
 					int FrameSize=toSize2(data, index);
-					System.out.println(FrameID+":"+FrameSize);
+					//System.out.println(FrameID+":"+FrameSize);
 					index+=4;
 					index+=2;
 					String enc="utf-8";
@@ -160,7 +161,7 @@ public class MusicID3
 					{}
 					index+=FrameSize;
 				}
-				System.out.println(data.length+"="+ index);
+				//System.out.println(data.length+"="+ index);
 			}
 		}
 		catch(Throwable e)

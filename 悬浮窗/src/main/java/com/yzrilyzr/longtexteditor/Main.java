@@ -167,7 +167,7 @@ public class Main implements Window.OnButtonDown,Window.OnCrash,OnClickListener,
 				});
 			sc.addView(t);
 		}
-		SharedPreferences sp=util.getSPRead();
+		SharedPreferences sp=util.getSPRead("longtexteditor");
 		l.textColor=sp.getInt("text",0xffffffff);
 		l.selectionColor=sp.getInt("sel",0xff20e0f0);
 		l.backColor=sp.getInt("lback",0xff000000);

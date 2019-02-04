@@ -144,5 +144,9 @@ public class Load implements Runnable,OnClickListener
 		// TODO: Implement this method
 		w.dismiss();
 		API.startService(c,cls.STARTBUTTON);
+		if(Window.devmode){
+			API.startService(c,cls.CONSOLE);
+			API.startService(c,c.getPackageName()+".apps.UiTest");
+		}
 	}
 }

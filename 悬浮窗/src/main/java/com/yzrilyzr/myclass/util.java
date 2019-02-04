@@ -437,7 +437,7 @@ public final class util
 		{
 			try
 			{
-				if(file.isDirectory())return "";
+				if(file.isDirectory()||file.getName().contains("cnt"))return "";
 				FileInputStream is=new FileInputStream(file);
 				byte[] bf=new byte[64];
 				is.read(bf);

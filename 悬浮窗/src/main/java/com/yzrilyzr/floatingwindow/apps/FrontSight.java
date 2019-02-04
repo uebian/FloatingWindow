@@ -139,6 +139,10 @@ public class FrontSight implements Window.OnButtonDown,OnClickListener,OnChecked
 			},cls.COLORPICKER);
 		}
 		setm();
-		if(p1==b1||p1==b2||p1==b3||p1==b4)util.getSPWrite("frontsight").putInt("frontsight",y).commit();
+		if(p1==b1||p1==b2||p1==b3||p1==b4)
+			util.getSPWrite("frontsight")
+			.putInt("frontsightx",x)
+			.putInt("frontsighty",y)
+			.commit();
 	}
 }

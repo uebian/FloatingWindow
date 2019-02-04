@@ -149,28 +149,25 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 		ct.setName(getString(R.string.app_name));
 		ct.setPriority(Thread.MAX_PRIORITY);
 		/*String value=null;
-		try
-		{
-            Object roSecureObj = Class.forName("android.os.SystemProperties")
-			.getMethod("get", String.class)
-			.invoke(null, "gsm.version.baseband");
-            if (roSecureObj != null) value = (String) roSecureObj;
-        }
-		catch (Exception e)
-		{
-            value = null;
-        }
-		if(value==null)throw new RuntimeException("");*/
+		 try
+		 {
+		 Object roSecureObj = Class.forName("android.os.SystemProperties")
+		 .getMethod("get", String.class)
+		 .invoke(null, "gsm.version.baseband");
+		 if (roSecureObj != null) value = (String) roSecureObj;
+		 }
+		 catch (Exception e)
+		 {
+		 value = null;
+		 }
+		 if(value==null)throw new RuntimeException("");*/
 		if(!util.sup)util.toast("不支持的设备");
 		Thread.setDefaultUncaughtExceptionHandler(this);
 		ct.setUncaughtExceptionHandler(this);
 		//if(Resources.getSystem().getDisplayMetrics().density!=3f)
-			//Toast.makeText(this,"安全警告:\n不支持的DPI\n您可以在设置中调节显示效果",1).show();
+		//Toast.makeText(this,"安全警告:\n不支持的DPI\n您可以在设置中调节显示效果",1).show();
 		API.startService(this,cls.LOAD);
-		if(Window.devmode){
-			API.startService(this,cls.CONSOLE);
-			API.startService(this,getPackageName()+".apps.UiTest");
-		}
+		
 		if(util.getSPRead().getBoolean("first",true))API.startService(this,cls.SETTINGS);
     }
 	@Override
@@ -191,7 +188,8 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 					{
 					}
 				}
-				if(!Window.crashdialog){
+				if(!Window.crashdialog)
+				{
 					ByteArrayOutputStream os=new ByteArrayOutputStream();
 					PrintWriter ps=new PrintWriter(os);
 					ps.println("很抱歉，程序崩溃了(⊙﹏⊙)");
@@ -227,14 +225,15 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 					{
 
 					}
-				System.exit(0);
+					System.exit(0);
 				}
 				else
 					try
 					{
 						final boolean[] bo=new boolean[]{true};
 						new Thread(){
-							@Override public void run(){
+							@Override public void run()
+							{
 								try
 								{
 									Thread.sleep(10000);
@@ -320,7 +319,7 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 	{
 		return null;
 	}
-	
+
 	@Override
 	public void onLowMemory()
 	{

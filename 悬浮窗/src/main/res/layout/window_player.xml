@@ -117,6 +117,7 @@
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:layout_margin="3dp"
+			vec="find"
 			android:id="@+id/musicplayerImageButton5"/>
 
 		<com.yzrilyzr.ui.myTextView
