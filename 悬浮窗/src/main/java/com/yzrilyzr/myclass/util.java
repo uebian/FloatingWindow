@@ -561,6 +561,8 @@ public final class util
 					case "vec":
 						API.startService(ctx,e.putExtra("type",2),cls.IMAGEVIEWER);
 						break;
+					default:
+					openFile(new File(path));
 				}
 				break;
 			case "audio":

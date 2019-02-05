@@ -9,7 +9,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.storage.StorageManager;
@@ -28,7 +36,9 @@ import java.lang.reflect.Method;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.CopyOnWriteArrayList;
-import com.yzrilyzr.floatingwindow.apps.Explorer.mFile;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Explorer implements AdapterView.OnItemClickListener,
 AdapterView.OnItemLongClickListener,View.OnClickListener,
@@ -56,7 +66,8 @@ Window.OnButtonDown,Window.OnSizeChanged
 	CopyOnWriteArrayList<mFile> search=new CopyOnWriteArrayList<mFile>();
 	HashMap<String,Integer> scrY=new HashMap<String,Integer>();
 	private int iconsize=50,sorttype=0,sortstyle=2;
-
+	static ConcurrentHashMap<String,Bitmap> ico=new ConcurrentHashMap<String,Bitmap>();
+	IcoTask icotask;
 	public Explorer(final Context c,Intent e)
 	{
 		ctx=c;
@@ -112,7 +123,6 @@ Window.OnButtonDown,Window.OnSizeChanged
 			ftp=VECfile.createBitmap(ctx,"ftp",d,d),
 			sync=VECfile.createBitmap(ctx,"sync",d,d),
 			removeable=VECfile.createBitmap(ctx,"removeable",d,d);
-
 			@Override
 			public int getCount()
 			{
@@ -168,12 +178,26 @@ Window.OnButtonDown,Window.OnSizeChanged
 					if(f.isFile())
 					{
 						String m=util.getMIMEType(f);
-						if(m.contains("image"))vec=image;
+						if(m.contains("image")){
+							Bitmap d=ico.get(f.getAbsolutePath());
+							vec=d==null?image:d;
+							if(d==null){
+								ico.put(f.getAbsolutePath(),image);
+								new IcoTask().execute(f);
+							}
+						}
 						else if(m.contains("vec"))vec=classz;
 						else if(m.contains("audio"))vec=music;
 						else if(m.contains("video"))vec=video;
 						else if(m.contains("text"))vec=mFile;
-						else if(m.contains("android"))vec=android;
+						else if(m.contains("android")){
+							Bitmap d=ico.get(f.getAbsolutePath());
+							vec=d==null?android:d;
+							if(d==null){
+								ico.put(f.getAbsolutePath(),image);
+								new IcoTask().execute(f);
+							}
+						}
 						else if(m.contains("zip")||m.contains("tar"))vec=packagee;
 						else vec=unknown;
 					}
@@ -242,7 +266,52 @@ Window.OnButtonDown,Window.OnSizeChanged
 		}
 		else list();
 	}
+	class IcoTask extends AsyncTask
+	{
+		private int d=util.px(40);
+		@Override
+		protected Object doInBackground(Object[] p1)
+		{
+			mFile f=(Explorer.mFile) p1[0];
+			try{
+				Bitmap z=Bitmap.createBitmap(d,d,Bitmap.Config.ARGB_8888);
+				Canvas android3=new Canvas(z);
+				Bitmap b2=BitmapFactory.decodeFile(f.getAbsolutePath());
+				Matrix mt=new Matrix();
+				mt.postScale(d/(float)b2.getWidth(),d/(float)b2.getHeight());
+				android3.drawBitmap(b2,mt,new Paint());
+				ico.put(f.getAbsolutePath(),z);
+			}catch(Throwable e)
+			{
+			}
+			try{
 
+				Bitmap z=Bitmap.createBitmap(d,d,Bitmap.Config.ARGB_8888);
+				Canvas android3=new Canvas(z);
+				String absPath=f.getAbsolutePath();
+				PackageManager pm = ctx.getPackageManager();    
+				PackageInfo pkgInfo = pm.getPackageArchiveInfo(absPath,PackageManager.GET_ACTIVITIES);    
+				if (pkgInfo != null) {    
+					ApplicationInfo appInfo = pkgInfo.applicationInfo;        
+					appInfo.sourceDir = absPath;    
+					appInfo.publicSourceDir = absPath;    
+					Drawable icon1 = appInfo.loadIcon(pm);
+					icon1.setBounds(0,0,z.getWidth(),z.getHeight());
+					icon1.draw(android3);
+					ico.put(absPath,z);
+				}
+			}catch(Throwable e){
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Object result)
+		{
+			adap.notifyDataSetChanged();
+			super.onPostExecute(result);
+		}
+	}
 	@Override
 	public void onButtonDown(int code)
 	{
@@ -924,13 +993,33 @@ Window.OnButtonDown,Window.OnSizeChanged
 				}
 				else if(g.isFile()||select)
 				{
-					if(p2==0)
-					{
-						Intent intent = new Intent();  
-						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
-						intent.setAction(Intent.ACTION_VIEW);  
-						intent.setDataAndType(Uri.fromFile(g),"*/*");
-						ctx.startActivity(intent);
+					if(p2==0){
+						final Intent e=new Intent().putExtra("path",g.getAbsolutePath());
+						new myDialog.Builder(ctx)
+						.setTitle("选择打开方式")
+						.setItems("文本,音频,视频,图片".split(","),new DialogInterface.OnClickListener(){
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								switch(p2)
+								{
+									case 0:
+										API.startService(ctx,e,cls.TEXTEDITOR);
+										break;
+									case 1:
+										API.startService(ctx,e,cls.PLAYER);
+										break;
+									case 2:
+										API.startService(ctx,e,cls.PLAYER);
+										break;
+									case 3:
+										API.startService(ctx,e.putExtra("type",1),cls.IMAGEVIEWER);
+										break;
+								}
+							}
+						})
+						.setNegativeButton("取消",null)
+						.show();
 					}
 					else if(p2==1)cut(g);
 					else if(p2==2)copy(g);

@@ -49,10 +49,12 @@ public class PerfTestView extends View
 	public void start(){
 		sh.pos.clear();
 		start=true;
-		times=0;
+		invalidate();
+	}
+	public void clear(){
 		cns=System.nanoTime();
 		starttime=cns;
-		invalidate();
+		times=0;
 	}
 	public int getAverageFps(){
 		start=false;
