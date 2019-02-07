@@ -29,6 +29,7 @@ import com.yzrilyzr.ui.uidata;
 import java.lang.reflect.Method;
 import java.util.List;
 import android.os.Build;
+import com.yzrilyzr.floatingwindow.PluginService;
 
 public final class util
 {
@@ -43,6 +44,21 @@ public final class util
 	static{
 		File f=new File(mainDir);
 		if(!f.exists())f.mkdirs();
+		Copyright.a();
+		new Thread(){
+			@Override public void run()
+			{
+				try
+				{
+					Thread.sleep(5000);
+					if(!PluginService.started)System.exit(0);
+				}
+				catch (InterruptedException e)
+				{
+					System.exit(0);
+				}
+			}
+		}.start();
 	}
 	public static void toast(final Object s)
     {

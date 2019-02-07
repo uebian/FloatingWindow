@@ -28,24 +28,7 @@ import java.lang.reflect.InvocationTargetException;
 public class PluginService extends android.app.Service implements Thread.UncaughtExceptionHandler
 {
 	public static JSEnv jsenv=null;
-	private static boolean started=false;
-	static{
-		Copyright.a();
-		new Thread(){
-			@Override public void run()
-			{
-				try
-				{
-					Thread.sleep(5000);
-					if(!started)System.exit(0);
-				}
-				catch (InterruptedException e)
-				{
-					System.exit(0);
-				}
-			}
-		}.start();
-	}
+	public static boolean started=false;
 	@Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
