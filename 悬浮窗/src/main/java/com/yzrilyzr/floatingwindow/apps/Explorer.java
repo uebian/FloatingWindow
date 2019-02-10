@@ -1767,6 +1767,9 @@ Window.OnButtonDown,Window.OnSizeChanged
 		@Override
 		public Explorer.mFile[] listFiles()
 		{
+			if(path.startsWith("ftp://")){
+				return null;
+			}
 			File[] sr=new File(path).listFiles();
 			mFile[] src=null;
 			if(sr==null)
@@ -1781,7 +1784,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 					BufferedReader e=new BufferedReader(new InputStreamReader(p.getErrorStream()));
 					String b=null;
 					ArrayList<String> st=new ArrayList<String>();
-					while((b=o.readLine())!=null)st.add(b);
+					while((b=o.readLine())!=null)st.add(path.concat(b));
 					while((b=e.readLine())!=null)return null;
 					p.waitFor();
 					src=new mFile[st.size()];
