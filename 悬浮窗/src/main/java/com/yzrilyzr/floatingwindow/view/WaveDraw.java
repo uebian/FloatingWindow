@@ -65,7 +65,7 @@ public class WaveDraw extends View
 		if(data!=null)
 			for(int i=0;i<data.length;i++)
 			{
-				data[i]=(int)(ps3.get((int)util.limit(i*ps3.size()/data.length,0,ps3.size()-1)).y-cy)*32767/getHeight();
+				data[i]=(int)(ps3.get(util.limit(i*ps3.size()/data.length,0,ps3.size()-1)).y-cy)*32767/getHeight();
 			}
 		pt.setColor(uidata.ACCENT);
 		canvas.drawPath(p,pt);
@@ -76,7 +76,7 @@ public class WaveDraw extends View
 		getParent().requestDisallowInterceptTouchEvent(true);
 		int a=event.getAction();
 		if(a==MotionEvent.ACTION_DOWN)
-			ww=(int)util.limit((int)Math.round(event.getX()*(ps.size()-1)/getWidth()),0,ps.size()-1);
+			ww=util.limit((int)Math.round(event.getX()*(ps.size()-1)/getWidth()),0,ps.size()-1);
 		else ps.get(ww).y=(Math.round((event.getY()-getHeight()/2)*32767/getHeight()/409.6f))*409.6f;
 		invalidate();
 		return true;

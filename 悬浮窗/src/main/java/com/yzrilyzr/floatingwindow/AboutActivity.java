@@ -22,6 +22,7 @@ public class AboutActivity extends myActivity
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		PluginService.started=true;
 		String s=getString(R.string.about2);
 		myTabLayout tb=(myTabLayout)findViewById(R.id.activitymainmyTabLayout1);
 		tb.setTouchable(false);
@@ -51,6 +52,7 @@ public class AboutActivity extends myActivity
 				if(++c==t.length)
 				{
 					finish();
+					PluginService.started=false;
 					util.getSPWrite("abouta").putBoolean("abouta",true).commit();
 					startActivity(new Intent(ctx,MainActivity.class));
 				}

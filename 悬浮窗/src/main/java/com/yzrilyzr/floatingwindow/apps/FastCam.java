@@ -369,8 +369,8 @@ public class FastCam implements Camera.PictureCallback,Camera.AutoFocusCallback,
 				cam.setParameters(p);
 			}
 			FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams) sv.getLayoutParams();
-			lp.width=(int) util.limit(w<h?w:h*xw/xh,0,w);
-			lp.height=(int) util.limit(w<h?w*xh/xw:h,0,h);
+			lp.width=util.limit(w<h?w:h*xw/xh,0,w);
+			lp.height=util.limit(w<h?w*xh/xw:h,0,h);
 			sv.setLayoutParams(lp);
 		}
 		catch(Throwable e)

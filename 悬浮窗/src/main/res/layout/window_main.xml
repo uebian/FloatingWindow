@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yzrilyzr.ui.myLinearLayout
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="match_parent"
 	android:layout_width="match_parent"
@@ -70,7 +70,7 @@
 
 	</LinearLayout>
 
-	<com.yzrilyzr.ui.myLinearLayoutBack
+	<LinearLayout
 		android:layout_height="match_parent"
 		android:layout_width="match_parent"
 		android:layout_marginLeft="4dp"
@@ -79,5 +79,4 @@
 		android:orientation="vertical"
 		android:id="@+id/mainContent"/>
 
-</com.yzrilyzr.ui.myLinearLayout>
-
+</LinearLayout>

@@ -35,6 +35,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.PorterDuff;
 
 public class LongTextView extends View
 {
@@ -83,6 +85,7 @@ public class LongTextView extends View
 	textTypeface;
 	public float scale=1,lscale=1,lpointLen;
 	private boolean smoved=false;
+	private Path textPath=new Path();
 	public void setTextWatcher(TextWatcher textWatcher)
 	{
 		this.textWatcher = textWatcher;
@@ -178,6 +181,22 @@ public class LongTextView extends View
 	{
 		stringLines.clear();
 	}
+	public int getIndexByX(String curLineStr,float scrX)
+	{
+		float x=scrX-xOff-lineNumWidth;
+		float w=-1;
+		int max=curLineStr.length(),min=0,mid=(max+min)/2;
+		while(w!=x&&max>=min)
+		{
+			w=measureText(curLineStr,0,mid);
+			if(w>x)max=mid-1;
+			else if(w<x)min=mid+1;
+			mid=(min+max)/2;
+		}
+		if(mid<0)mid=0;
+		if(mid>curLineStr.length())mid=curLineStr.length();
+		return mid;
+	}
 	private class Cursor
 	{
 		public int index;
@@ -192,7 +211,7 @@ public class LongTextView extends View
 		{
 			x=xx-xOff-lineNumWidth;
 			String curLineStr=getLine(line);
-			float w=0;
+			float w=-1;
 			int max=curLineStr.length(),min=0,mid=(max+min)/2;
 			while(w!=x&&max>=min)
 			{
@@ -278,7 +297,7 @@ public class LongTextView extends View
 		if(!isSelection)
 		{
 			StringBuffer sb=new StringBuffer()
-				.append(getCurrentLine());
+			.append(getCurrentLine());
 			if(cursors[0].index==0)
 			{
 				if(cursors[0].line!=0)
@@ -332,7 +351,7 @@ public class LongTextView extends View
 		if(cursors[0].line==cursors[1].line)
 		{
 			StringBuffer s=new StringBuffer()
-				.append(getCurrentLine());
+			.append(getCurrentLine());
 			selected.append(s.substring(cursors[0].index,cursors[1].index));
 			if(delete)s.delete(cursors[0].index,cursors[1].index);
 			setCurrentLine(s.toString());
@@ -374,7 +393,7 @@ public class LongTextView extends View
 		if(delete)isSelection=false;
 		return selected.toString();
 	}
-	
+
 	public boolean sendKeyEvent(KeyEvent p1)
 	{
 		// TODO: Implement this method
@@ -497,7 +516,8 @@ public class LongTextView extends View
 			setText("语法文件解析失败:"+e);
 		}
 	}
-	public void gotoend(){
+	public void gotoend()
+	{
 		isEdit=true;
 		isSelection=false;
 		cursors[0].line=stringLines.size()-1;
@@ -572,7 +592,9 @@ public class LongTextView extends View
 	{
 		if(stringLines.size()==0)stringLines.add("");
 		int w=getWidth(),h=getHeight();
+		pa.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 		canvas.drawColor(backColor);
+		pa.setXfermode(null);
 		//限定坐标
 		if(xOff>0)xOff=0;
 		if(yOff>0)yOff=0;
@@ -680,31 +702,25 @@ public class LongTextView extends View
 			for(int i=(int)(-yOff/th),l=1;i<(-yOff+h)/th&&i>=0&&i<stringLines.size();i++,l++)
 			{
 				s=stringLines.get(i);
-				if(s.length()<1000)
+				int st=util.limit(getIndexByX(s,lineNumWidth),0,s.length());
+				int ed=util.limit(getIndexByX(s,w)+1,0,s.length());
+				pa.setColor(textColor);
+				canvas.drawText(s.replace("\t",TAB).substring(st,ed),measureText(s,0,st)+lineNumWidth+xOff,l*th+yA-ky,pa);
+				if(curSyntax!=null)
 				{
-					pa.setColor(textColor);
-					canvas.drawText(s.replace("\t",TAB),lineNumWidth+xOff,l*th+yA-ky,pa);
-					if(curSyntax!=null)
-					{
-						CopyOnWriteArrayList<Span> gg=span.get(Integer.toString(i));
-						if(cursors[0].line==i)gg=nowspan;
-						if(gg!=null)
-							for(Span spp:gg)
-							{
-								float xx=spp.x+lineNumWidth+xOff;
-								if(xx>w)break;
-								pa.setColor(spp.color);
-								canvas.drawText(spp.ch.replace("\t",TAB),xx,l*th+yA-ky,pa);
-							}
-					}
-					pa.setColor(enterColor);
-					canvas.drawText("↲",lineNumWidth+xOff+measureText(s),l*th+yA-ky,pa);
+					CopyOnWriteArrayList<Span> gg=span.get(Integer.toString(i));
+					if(cursors[0].line==i)gg=nowspan;
+					if(gg!=null)
+						for(Span spp:gg)
+						{
+							float xx=spp.x+lineNumWidth+xOff;
+							if(xx>w)break;
+							pa.setColor(spp.color);
+							canvas.drawText(spp.ch.replace("\t",TAB),xx,l*th+yA-ky,pa);
+						}
 				}
-				else
-				{
-					pa.setColor(enterColor);
-					canvas.drawText("<无法显示:单行太长>",lineNumWidth+xOff,l*th+yA-ky,pa);
-				}
+				pa.setColor(enterColor);
+				//canvas.drawText("↲",lineNumWidth+xOff+measureText(s),l*th+yA-ky,pa);
 			}
 			pa.setColor(lineNumBackColor);
 			canvas.drawRect(0,0,lineNumWidth,h,pa);
@@ -784,7 +800,8 @@ public class LongTextView extends View
 		if(event.getPointerCount()==1)
 		{
 			if(a==MotionEvent.ACTION_DOWN)smoved=false;
-			if(!smoved){
+			if(!smoved)
+			{
 				float x=event.getX(),y=event.getY();
 				if(event.getAction()==MotionEvent.ACTION_DOWN)
 					if(menuKey.size()!=0&&menu!=null&&menu.contains(x,y))menuTouch=true;
@@ -901,22 +918,22 @@ public class LongTextView extends View
 							break;
 					}
 					if(System.currentTimeMillis()-LongClickMillis>500&&!longClick&&
-					   Math.abs(x-lastX)<10&&Math.abs(y-lastY)<10)
+					Math.abs(x-lastX)<10&&Math.abs(y-lastY)<10)
 					{
 						longClick=true;
 						new myDialog.Builder(getContext())
-							.setItems(!isSelection?
-							("全选,粘贴,格式化文本,跳转到开头,跳转到结尾,跳转至…,插入时间,字数统计").split(","):
-							("全选,剪切,复制,粘贴,重复选中的文本,转为大写,转为小写,首字母大写,跳转到开头,跳转到结尾,跳转至…,插入时间,字数统计").split(","),
-							new DialogInterface.OnClickListener(){
-								@Override
-								public void onClick(DialogInterface p1, int p2)
-								{
-									// TODO: Implement this method
-									clicki(p2);
-								}
-							})
-							.show();
+						.setItems(!isSelection?
+						("全选,粘贴,格式化文本,跳转到开头,跳转到结尾,跳转至…,插入时间,字数统计").split(","):
+						("全选,剪切,复制,粘贴,重复选中的文本,转为大写,转为小写,首字母大写,跳转到开头,跳转到结尾,跳转至…,插入时间,字数统计").split(","),
+						new DialogInterface.OnClickListener(){
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								// TODO: Implement this method
+								clicki(p2);
+							}
+						})
+						.show();
 					}
 				}
 				else
@@ -943,9 +960,9 @@ public class LongTextView extends View
 									StringBuilder cl=new StringBuilder().append(getCurrentLine());
 									String k=menuKey.get(w).substring(1);
 									StringBuilder cl2=new StringBuilder()
-										.append(cl.substring(0,suggestionStart))
-										.append(k)
-										.append(cl.substring(suggestionEnd));
+									.append(cl.substring(0,suggestionStart))
+									.append(k)
+									.append(cl.substring(suggestionEnd));
 									setCurrentLine(cl2.toString());
 									cursors[0].index=suggestionStart+k.length();
 								}
@@ -1023,25 +1040,25 @@ public class LongTextView extends View
 				final myEditText e=new myEditText(getContext());
 				e.setInputType(InputType.TYPE_CLASS_NUMBER);
 				new myDialog.Builder(getContext())
-					.setView(e)
-					.setTitle("跳转至…(共"+stringLines.size()+"行)")
-					.setPositiveButton("跳转",new DialogInterface.OnClickListener(){
-						@Override
-						public void onClick(DialogInterface p1, int p2)
+				.setView(e)
+				.setTitle("跳转至…(共"+stringLines.size()+"行)")
+				.setPositiveButton("跳转",new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface p1, int p2)
+					{
+						// TODO: Implement this method
+						try
 						{
-							// TODO: Implement this method
-							try
-							{
-								cursors[0].line=Integer.parseInt(e.getText().toString())-1;
-								cursors[0].index=0;
-								isEdit=true;
-							}
-							catch(Throwable ee)
-							{}
+							cursors[0].line=Integer.parseInt(e.getText().toString())-1;
+							cursors[0].index=0;
+							isEdit=true;
 						}
-					})
-					.setNegativeButton("取消",null)
-					.show();
+						catch(Throwable ee)
+						{}
+					}
+				})
+				.setNegativeButton("取消",null)
+				.show();
 				util.setWeight(e);
 			}
 			else if((i==6&&!isSelection)||(i==11&&isSelection))commitText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())),0);
@@ -1060,13 +1077,13 @@ public class LongTextView extends View
 					else if(ch==']')l[5]++;
 				}
 				new myDialog.Builder(getContext())
-					.setMessage(
-					"字符数:"+a.length()+CRLF+
-					"单词数:"+(a.split("\\w+").length-1)+CRLF+
-					"行数:"+stringLines.size()+CRLF+
-					"()数:"+l[0]+"|"+l[1]+CRLF+
-					"{}数:"+l[2]+"|"+l[3]+CRLF+
-					"[]数:"+l[4]+"|"+l[5]+CRLF
+				.setMessage(
+				"字符数:"+a.length()+CRLF+
+				"单词数:"+(a.split("\\w+").length-1)+CRLF+
+				"行数:"+stringLines.size()+CRLF+
+				"()数:"+l[0]+"|"+l[1]+CRLF+
+				"{}数:"+l[2]+"|"+l[3]+CRLF+
+				"[]数:"+l[4]+"|"+l[5]+CRLF
 				).show();
 			}
 			else if(isSelection)
@@ -1208,18 +1225,18 @@ public class LongTextView extends View
 		}
 	}
 	public float measureText(String text)
-		{
-			int c=0,i=0;
-			while((i=text.indexOf("\t",i))!=-1)
-			{c++;i++;}
-			return pa.measureText(text.replace("\t",""))+pa.measureText(TAB)*c;
-		}
-		public float measureText(String text, int start, int end)
-		{
-			int c=0,i=start;
-			while((i=text.indexOf("\t",i))!=-1&&i<end)
-			{c++;i++;}
-			return pa.measureText(text.replace("\t",""), start, end-c)+pa.measureText(TAB)*c;
+	{
+		int c=0,i=0;
+		while((i=text.indexOf("\t",i))!=-1)
+		{c++;i++;}
+		return pa.measureText(text.replace("\t",""))+pa.measureText(TAB)*c;
+	}
+	public float measureText(String text, int start, int end)
+	{
+		int c=0,i=start;
+		while((i=text.indexOf("\t",i))!=-1&&i<end)
+		{c++;i++;}
+		return pa.measureText(text.replace("\t",""), start, end-c)+pa.measureText(TAB)*c;
 	}
 	public static class Syntax
 	{
@@ -1231,8 +1248,10 @@ public class LongTextView extends View
 		ArrayList<String> order=new ArrayList<String>();
 		HashMap<String,ArrayList<String>> group=new HashMap<String,ArrayList<String>>();
 	}
-	class Conn extends BaseInputConnection{
-		public Conn(View t,boolean b){
+	class Conn extends BaseInputConnection
+	{
+		public Conn(View t,boolean b)
+		{
 			super(t,b);
 		}
 
@@ -1249,6 +1268,6 @@ public class LongTextView extends View
 			// TODO: Implement this method
 			return LongTextView.this.sendKeyEvent(event);
 		}
-		
+
 	}
 }

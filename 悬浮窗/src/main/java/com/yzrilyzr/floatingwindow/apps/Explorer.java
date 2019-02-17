@@ -67,6 +67,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 	HashMap<String,Integer> scrY=new HashMap<String,Integer>();
 	private int iconsize=50,sorttype=0,sortstyle=2;
 	static ConcurrentHashMap<String,Bitmap> ico=new ConcurrentHashMap<String,Bitmap>();
+	static ConcurrentHashMap<String,Long> ico2=new ConcurrentHashMap<String,Long>();
 	IcoTask icotask;
 	public Explorer(final Context c,Intent e)
 	{
@@ -180,10 +181,12 @@ Window.OnButtonDown,Window.OnSizeChanged
 						String m=util.getMIMEType(f);
 						if(m.contains("image")){
 							Bitmap d=ico.get(f.getAbsolutePath());
+							Long c=ico2.get(f.getAbsolutePath());
 							vec=d==null?image:d;
-							if(d==null){
+							if(d==null||c==null||c.longValue()!=f.lastModified()){
 								ico.put(f.getAbsolutePath(),image);
-								new IcoTask().execute(f);
+								ico2.put(f.getAbsolutePath(),new Long(f.lastModified()));
+								new IcoTask().execute(1,f);
 							}
 						}
 						else if(m.contains("vec"))vec=classz;
@@ -192,10 +195,12 @@ Window.OnButtonDown,Window.OnSizeChanged
 						else if(m.contains("text"))vec=mFile;
 						else if(m.contains("android")){
 							Bitmap d=ico.get(f.getAbsolutePath());
+							Long c=ico2.get(f.getAbsolutePath());
 							vec=d==null?android:d;
-							if(d==null){
+							if(d==null||c==null||c.longValue()!=f.lastModified()){
 								ico.put(f.getAbsolutePath(),image);
-								new IcoTask().execute(f);
+								ico2.put(f.getAbsolutePath(),new Long(f.lastModified()));
+								new IcoTask().execute(2,f);
 							}
 						}
 						else if(m.contains("zip")||m.contains("tar"))vec=packagee;
@@ -272,36 +277,38 @@ Window.OnButtonDown,Window.OnSizeChanged
 		@Override
 		protected Object doInBackground(Object[] p1)
 		{
-			mFile f=(Explorer.mFile) p1[0];
-			try{
-				Bitmap z=Bitmap.createBitmap(d,d,Bitmap.Config.ARGB_8888);
-				Canvas android3=new Canvas(z);
-				Bitmap b2=BitmapFactory.decodeFile(f.getAbsolutePath());
-				Matrix mt=new Matrix();
-				mt.postScale(d/(float)b2.getWidth(),d/(float)b2.getHeight());
-				android3.drawBitmap(b2,mt,new Paint());
-				ico.put(f.getAbsolutePath(),z);
-			}catch(Throwable e)
-			{
-			}
-			try{
-
-				Bitmap z=Bitmap.createBitmap(d,d,Bitmap.Config.ARGB_8888);
-				Canvas android3=new Canvas(z);
-				String absPath=f.getAbsolutePath();
-				PackageManager pm = ctx.getPackageManager();    
-				PackageInfo pkgInfo = pm.getPackageArchiveInfo(absPath,PackageManager.GET_ACTIVITIES);    
-				if (pkgInfo != null) {    
-					ApplicationInfo appInfo = pkgInfo.applicationInfo;        
-					appInfo.sourceDir = absPath;    
-					appInfo.publicSourceDir = absPath;    
-					Drawable icon1 = appInfo.loadIcon(pm);
-					icon1.setBounds(0,0,z.getWidth(),z.getHeight());
-					icon1.draw(android3);
-					ico.put(absPath,z);
+			int type=p1[0];
+			mFile f=(Explorer.mFile) p1[1];
+			if(type==1)
+				try{
+					Bitmap z=Bitmap.createBitmap(d,d,Bitmap.Config.ARGB_8888);
+					Canvas android3=new Canvas(z);
+					Bitmap b2=BitmapFactory.decodeFile(f.getAbsolutePath());
+					Matrix mt=new Matrix();
+					mt.postScale(d/(float)b2.getWidth(),d/(float)b2.getHeight());
+					android3.drawBitmap(b2,mt,new Paint());
+					ico.put(f.getAbsolutePath(),z);
+				}catch(Throwable e)
+				{
 				}
-			}catch(Throwable e){
-			}
+			if(type==2)
+				try{
+					Bitmap z=Bitmap.createBitmap(d,d,Bitmap.Config.ARGB_8888);
+					Canvas android3=new Canvas(z);
+					String absPath=f.getAbsolutePath();
+					PackageManager pm = ctx.getPackageManager();    
+					PackageInfo pkgInfo = pm.getPackageArchiveInfo(absPath,PackageManager.GET_ACTIVITIES);    
+					if (pkgInfo != null) {    
+						ApplicationInfo appInfo = pkgInfo.applicationInfo;        
+						appInfo.sourceDir = absPath;    
+						appInfo.publicSourceDir = absPath;    
+						Drawable icon1 = appInfo.loadIcon(pm);
+						icon1.setBounds(0,0,z.getWidth(),z.getHeight());
+						icon1.draw(android3);
+						ico.put(absPath,z);
+					}
+				}catch(Throwable e){
+				}
 			return null;
 		}
 
@@ -1784,7 +1791,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 					BufferedReader e=new BufferedReader(new InputStreamReader(p.getErrorStream()));
 					String b=null;
 					ArrayList<String> st=new ArrayList<String>();
-					while((b=o.readLine())!=null)st.add(path.concat(b));
+					while((b=o.readLine())!=null)st.add(String.format("%s/%s",path,b));
 					while((b=e.readLine())!=null)return null;
 					p.waitFor();
 					src=new mFile[st.size()];

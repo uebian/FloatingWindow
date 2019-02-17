@@ -49,14 +49,15 @@ public class MainActivity extends Activity
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 3 && resultCode == RESULT_OK && null != data)
 		{  
-			Uri selectedImage = data.getData();  
-			String[] filePathColumn = { MediaStore.Images.Media.DATA };  
+			Uri selectedImage = data.getData();
+			
+			/*String[] filePathColumn = { MediaStore.Images.Media.DATA };  
 			Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);  
 			cursor.moveToFirst();  
 			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);  
 			final String picturePath = cursor.getString(columnIndex);  
-			cursor.close();
-			MainView.render.builder.setBgpath(picturePath);
+			cursor.close();*/
+			MainView.render.builder.setBgpath(selectedImage.getPath());
 		}
 	}
 	@Override

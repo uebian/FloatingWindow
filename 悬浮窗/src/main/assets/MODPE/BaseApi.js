@@ -15,6 +15,7 @@ function print(s){
 function clientMessage(s){
 	_cbk.print("<客户端信息>"+s);
 }
+var util=com.yzrilyzr.myclass.util;
 var ModPE={
 	setItem:function(a,b,c,d,e){_cbk.print("设置物品,id:"+a+",名称:"+b+",damage:"+c+",贴图名:"+d+",可堆叠数:"+e);},
 	setFoodItem:function(a,b,c,d,e,f){_cbk.print("设置食物物品,id:"+a+",名称:"+b+",damage:"+c+",恢复饥饿:"+d+",贴图名:"+e+",可堆叠数:"+f);},

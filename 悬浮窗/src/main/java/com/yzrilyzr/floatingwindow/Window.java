@@ -726,10 +726,10 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
                 windowParam.y = paramY + dy;
 				if(!nolimit)
 				{
-					windowParam.x=(int) util.limit(windowParam.x,0,util.getScreenWidth()-(minwin?minButton.getWidth():width));
-					windowParam.y=(int) util.limit(windowParam.y,0,util.getScreenHeight()-(minwin?minButton.getHeight():height));
+					windowParam.x=util.limit(windowParam.x,0,util.getScreenWidth()-(minwin?minButton.getWidth():width));
+					windowParam.y=util.limit(windowParam.y,0,util.getScreenHeight()-(minwin?minButton.getHeight():height));
 				}
-				else windowParam.y=(int) util.limit(windowParam.y,0,util.getScreenHeight());
+				else windowParam.y=util.limit(windowParam.y,0,util.getScreenHeight());
                 window.updateViewLayout(winView,windowParam);
 				if(onPositionChanged!=null)onPositionChanged.onPositionChanged(windowParam.x,windowParam.y);
                 break;

@@ -85,6 +85,7 @@ public class StarterView extends View
     
     public void open()
     {
+		rect=new RectF(kx-2f*dd,ky-2f*dd,kx+2f*dd,ky+2f*dd);
 		if(uidata.UI_USETYPEFACE)paint.setTypeface(uidata.UI_TYPEFACE);
         if(listener!=null)listener.onAnimStart();
         open=true;

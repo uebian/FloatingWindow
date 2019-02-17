@@ -419,6 +419,10 @@ public final class util
 	{
 		return Math.max(Math.min(x,max),min);
 	}
+	public static int limit(int x,int min,int max)
+	{
+		return Math.max(Math.min(x,max),min);
+	}
 	public static final void openFile(File file)
 	{  
 		Intent intent = new Intent();  
@@ -477,7 +481,7 @@ public final class util
 	} 
 	private static final String[][] HEAD_MapTable={
 	{"7z",  	"application/x-7z"},
-	{"pk",    "application/vndandroidpackage-archive"},  
+	{"pk",    "application/x-zip-compressed"},  
 	{"gif",	  "image/gif"},
 	{"exif",   	"image/jpeg"},
 	{"id3",		"audio/x-mpeg"},

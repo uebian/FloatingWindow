@@ -62,7 +62,7 @@ public class myTabLayout extends View
 		this(c,null);
 	}
 	public void setCurrent(int i){
-		cur=(int) util.limit(i,0,items.length);
+		cur=util.limit(i,0,items.length);
 		if(xx+cur*ew<0||xx+(cur+1)*ew>screenWidth)
 		{
 			xx=-cur*ew+screenWidth/2-ew/2;

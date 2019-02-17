@@ -123,6 +123,7 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
     public void onCreate()
     {
 		super.onCreate();
+		if(!util.getSPRead("abouta").getBoolean("abouta",false))fstop(this);
 		util.ctx=getApplicationContext();
         Copyright.k();
 		started=true;
