@@ -85,7 +85,6 @@ public class LongTextView extends View
 	textTypeface;
 	public float scale=1,lscale=1,lpointLen;
 	private boolean smoved=false;
-	private Path textPath=new Path();
 	public void setTextWatcher(TextWatcher textWatcher)
 	{
 		this.textWatcher = textWatcher;
@@ -701,12 +700,13 @@ public class LongTextView extends View
 			float ky=pa.getFontMetrics().descent;
 			for(int i=(int)(-yOff/th),l=1;i<(-yOff+h)/th&&i>=0&&i<stringLines.size();i++,l++)
 			{
+				float dy=l*th+yA-ky;
 				s=stringLines.get(i);
 				int st=util.limit(getIndexByX(s,lineNumWidth),0,s.length());
 				int ed=util.limit(getIndexByX(s,w)+1,0,s.length());
 				pa.setColor(textColor);
-				canvas.drawText(s.replace("\t",TAB).substring(st,ed),measureText(s,0,st)+lineNumWidth+xOff,l*th+yA-ky,pa);
-				if(curSyntax!=null)
+				canvas.drawText(s.substring(st,ed).replace("\t",TAB),measureText(s,0,st)+lineNumWidth+xOff,dy,pa);
+				/*if(curSyntax!=null)
 				{
 					CopyOnWriteArrayList<Span> gg=span.get(Integer.toString(i));
 					if(cursors[0].line==i)gg=nowspan;
@@ -716,11 +716,11 @@ public class LongTextView extends View
 							float xx=spp.x+lineNumWidth+xOff;
 							if(xx>w)break;
 							pa.setColor(spp.color);
-							canvas.drawText(spp.ch.replace("\t",TAB),xx,l*th+yA-ky,pa);
+							canvas.drawText(spp.ch.replace("\t",TAB),xx,dy,pa);
 						}
-				}
+				}*/
 				pa.setColor(enterColor);
-				//canvas.drawText("↲",lineNumWidth+xOff+measureText(s),l*th+yA-ky,pa);
+				canvas.drawText("↲",lineNumWidth+xOff+measureText(s),dy,pa);
 			}
 			pa.setColor(lineNumBackColor);
 			canvas.drawRect(0,0,lineNumWidth,h,pa);
@@ -897,21 +897,22 @@ public class LongTextView extends View
 								isEdit=false;
 							}
 							//选择拖动条
+							int h=util.px(40);
 							if(touchHan==0)
 							{
-								cursors[0].computeLineIndex(x,y-util.px(30));
+								cursors[0].computeLineIndex(x,y-h);
 								showHan=300;
 								isEdit=true;
 							}
 							else if(touchHan==2)
 							{
-								cursors[1].computeLineIndex(x,y-util.px(30));
+								cursors[1].computeLineIndex(x,y-h);
 								showHan=300;
 								isEdit=true;
 							}
 							else if(touchHan==1)
 							{
-								cursors[0].computeLineIndex(x,y-util.px(30));
+								cursors[0].computeLineIndex(x,y-h);
 								showHan=300;
 								isEdit=true;
 							}

@@ -103,7 +103,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 		if(width>0&&height>0)
 		{
 			windowParam.x=(util.getScreenWidth()-width)/2;
-			windowParam.y=(util.getScreenHeight()-height)/2;
+			windowParam.y=Math.max(0,(util.getScreenHeight()-height)/2);
 		}
     }
 
