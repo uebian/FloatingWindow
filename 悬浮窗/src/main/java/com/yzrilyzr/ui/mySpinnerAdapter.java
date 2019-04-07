@@ -8,6 +8,12 @@ import com.yzrilyzr.myclass.util;
 
 public class mySpinnerAdapter implements SpinnerAdapter
 {
+	public CharSequence[] getAutofillOptions()
+	{
+		// TODO: Implement this method
+		return null;
+	}
+	
 	String[] ws=new String[0];
 	public mySpinnerAdapter(String[] k){
 		ws=k;

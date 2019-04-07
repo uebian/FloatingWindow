@@ -1,4 +1,4 @@
-package com.yzrilyzr.jscalljava;
+package com.yzrilyzr.mcpehelper;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

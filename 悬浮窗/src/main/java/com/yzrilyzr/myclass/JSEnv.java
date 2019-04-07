@@ -1,22 +1,12 @@
-package com.yzrilyzr.floatingwindow;
+package com.yzrilyzr.myclass;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.ScrollView;
-import com.yzrilyzr.ui.myEditText;
-import com.yzrilyzr.ui.myTextView;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import com.yzrilyzr.myclass.util;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import com.yzrilyzr.myclass.util;
-import org.mozilla.javascript.NativeObject;
-import android.content.res.AssetManager;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class JSEnv implements Runnable
 {

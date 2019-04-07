@@ -16,12 +16,12 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.yzrilyzr.floatingwindow.API;
-import com.yzrilyzr.floatingwindow.JSEnv;
 import com.yzrilyzr.floatingwindow.R;
 import com.yzrilyzr.floatingwindow.Window;
 import com.yzrilyzr.floatingwindow.apps.cls;
 import com.yzrilyzr.icondesigner.VecView;
 import com.yzrilyzr.longtexteditor.LongTextView;
+import com.yzrilyzr.myclass.JSEnv;
 import com.yzrilyzr.myclass.util;
 import java.util.concurrent.CopyOnWriteArrayList;
 

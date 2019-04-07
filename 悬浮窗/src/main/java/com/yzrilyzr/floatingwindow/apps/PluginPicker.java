@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,9 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
-import org.apache.commons.codec.binary.Base64;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSizeChanged,Window.OnButtonDown
 {
@@ -125,7 +123,7 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 			.putString("pkg"+which,p)
 			.putString("cls"+which,c)
 			.putString("tip"+which,(String)last.get(p3).get("text1"))
-			.putString("ico"+which,new String(Base64.encodeBase64(o.toByteArray())))
+			.putString("ico"+which,Base64.encodeToString(o.toByteArray(),0))
 			.commit();
 			StarterView.load(ctx);
 		}

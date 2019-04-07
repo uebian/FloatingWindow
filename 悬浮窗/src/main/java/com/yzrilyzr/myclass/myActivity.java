@@ -13,6 +13,11 @@ import com.yzrilyzr.ui.uidata;
 
 public class myActivity extends Activity implements View.OnClickListener
 {
+	public void onPointerCaptureChanged(boolean hasCapture)
+	{
+		// TODO: Implement this method
+	}
+	
 	public myActivity ctx=this;
 	@Override
 	public void onClick(View p1)

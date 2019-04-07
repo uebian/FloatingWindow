@@ -1,27 +1,28 @@
 package com.yzrilyzr.floatingwindow.apps;
-import com.yzrilyzr.floatingwindow.*;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import com.yzrilyzr.floatingwindow.ANRThread;
+import com.yzrilyzr.floatingwindow.API;
+import com.yzrilyzr.floatingwindow.GetServer;
+import com.yzrilyzr.floatingwindow.PluginService;
+import com.yzrilyzr.floatingwindow.Window;
 import com.yzrilyzr.floatingwindow.apps.cls;
 import com.yzrilyzr.floatingwindow.view.StarterView;
+import com.yzrilyzr.icondesigner.Shape;
+import com.yzrilyzr.icondesigner.VECfile;
 import com.yzrilyzr.icondesigner.VecView;
+import com.yzrilyzr.myclass.JSEnv;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myLoadingView;
-import com.yzrilyzr.ui.myRippleDrawable;
 import com.yzrilyzr.ui.myTextViewTitle;
 import com.yzrilyzr.ui.uidata;
-import android.view.View;
-import android.content.res.Resources;
-import android.widget.LinearLayout.LayoutParams;
-import com.yzrilyzr.icondesigner.VECfile;
 import java.io.IOException;
-import com.yzrilyzr.icondesigner.Shape;
 
 public class Load implements Runnable,OnClickListener
 {

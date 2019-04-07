@@ -1,4 +1,4 @@
-package com.yzrilyzr.jscalljava;
+package com.yzrilyzr.mcpehelper;
 import android.content.Context;
 import android.content.Intent;
 import com.yzrilyzr.floatingwindow.Window;

@@ -1,22 +1,20 @@
 package com.yzrilyzr.floatingwindow;
-import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
 import com.yzrilyzr.floatingwindow.apps.cls;
+import com.yzrilyzr.myclass.myActivity;
 import com.yzrilyzr.myclass.util;
 import java.io.File;
 import java.lang.reflect.Field;
-import android.app.Fragment;
 
-public class MainActivity extends Activity
+public class MainActivity extends myActivity
 {
 	public static Object activityThread;
 	static{

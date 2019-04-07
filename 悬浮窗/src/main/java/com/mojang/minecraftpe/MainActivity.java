@@ -6,6 +6,11 @@ import android.view.WindowManager;
 
 public class MainActivity extends Activity
 {
+	public void onPointerCaptureChanged(boolean hasCapture)
+	{
+		// TODO: Implement this method
+	}
+
 	public static WeakReference<Activity> currentMainActivity=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

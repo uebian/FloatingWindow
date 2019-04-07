@@ -1,13 +1,12 @@
 package com.yzrilyzr.background;
 import android.graphics.Canvas;
-import com.yzrilyzr.ui.uidata;
-import android.view.SurfaceHolder;
-import java.util.ArrayList;
-import android.graphics.PointF;
-import java.util.Random;
-import com.yzrilyzr.myclass.util;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.view.MotionEvent;
+import com.yzrilyzr.myclass.util;
+import com.yzrilyzr.ui.uidata;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Shapes extends BGdraw
 {

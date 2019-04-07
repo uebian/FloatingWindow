@@ -15,7 +15,6 @@ import com.yzrilyzr.ui.myViewPager;
 
 public class AboutActivity extends myActivity
 {
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{

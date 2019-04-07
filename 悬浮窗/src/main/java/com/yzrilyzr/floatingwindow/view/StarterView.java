@@ -12,7 +12,7 @@ import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.uidata;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import org.apache.commons.codec.binary.Base64;
+import android.util.Base64;
 
 public class StarterView extends View
 {
@@ -70,8 +70,7 @@ public class StarterView extends View
 			{
 				if(tk!=null)
 				{
-					byte[] b=tk.getBytes();
-					b=Base64.decodeBase64(b);
+					byte[] b=Base64.decode(tk,0);
 					bmp[i]=BitmapFactory.decodeByteArray(b,0,b.length);
 					if(bmp[i]==null)bmp[i]=VECfile.createBitmap(ctx,"add",(int)ee,(int)ee);
 					else bmp[i]=bmp[i];
