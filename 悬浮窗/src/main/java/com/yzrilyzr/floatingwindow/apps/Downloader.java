@@ -163,6 +163,7 @@ public class Downloader implements OnClickListener,Window.OnButtonDown,TextWatch
 					RandomAccessFile mAccessFile=new RandomAccessFile(file, "rwd");//"rwd"可读，可写
 					mAccessFile.setLength(length);//占据文件的空间
 					pro[1]=length;
+					pro[0]=0;
 					int size=length/threadCount;
 					for (int id = 0; id < threadCount; id++)
 					{
