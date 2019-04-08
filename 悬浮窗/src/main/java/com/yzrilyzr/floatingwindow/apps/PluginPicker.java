@@ -187,11 +187,36 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 									cache.add(m);
 								}
 							}
+							cls=ai.metaData.getString("fwpluginjs",null);
+							if(cls!=null)
+							{
+								cls=cls.replace(" ","");
+								String[] cs=cls.split(";");
+								for(String s:cs)
+								{
+									String[] k=s.split(":");
+									String[] g=k[1].split("@");
+									Map<String,Object> m=new HashMap<String,Object>();
+									if(g.length==1)m.put("icon",appInfo.loadIcon(pm));
+									else if(g.length==2)
+									{
+										if(g[1].startsWith("V"))
+											m.put("icon",new BitmapDrawable(VECfile.createBitmap(VECfile.readFileFromIs(API.getPkgFile(util.ctx,appInfo.packageName,"assets/"+g[1].substring(1)+".vec")),util.px(64),util.px(64))));
+										else if(g[1].startsWith("D"))m.put("icon",new BitmapDrawable(BitmapFactory.decodeStream(API.getPkgFile(util.ctx,appInfo.packageName,g[1].substring(1)))));
+									}
+									m.put("pkg",appInfo.packageName);
+									m.put("text1",k[0]);
+									m.put("class","js:"+g[0]);
+									m.put("text2",appInfo.loadLabel(pm));
+									cache.add(m);
+								}
+							}
 						}
 					}
 					catch(Throwable ep)
 					{
-
+						util.toast("读取插件信息错误:"+appInfo.loadLabel(pm)+"\n详情查看控制台");
+						ep.printStackTrace();
 					}
 				}
 			}

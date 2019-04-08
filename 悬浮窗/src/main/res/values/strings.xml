@@ -27,6 +27,9 @@
 		控制台:.apps.Console@Vconsole;
 		设置/关于:.apps.Settings@Vsettings;
 		分享本程序:.apps.ShareFW@Vloadout;</string>
+	<string name="reg_js">
+		测试js:test.js
+	</string>
 	<string name="name">by yzrilyzr</string>
 	<string name="nmsl">修改版权全家爆炸</string>
 	<string name="about">		FloatingWindow 悬浮窗\n

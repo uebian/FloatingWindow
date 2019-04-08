@@ -23,6 +23,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class PluginService extends android.app.Service implements Thread.UncaughtExceptionHandler
 {
@@ -68,7 +70,16 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 			if(pkg==null)return;
             clazz=intent.getStringExtra("class");
             String path=PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
-            ClassLoader mainloader=ctx.getClassLoader();
+            if(clazz.startsWith("js:")){
+				BufferedReader re=new BufferedReader(new InputStreamReader(API.getPkgFile(util.ctx,pkg,"assets/"+clazz.substring(3))));
+				StringBuilder b=new StringBuilder();
+				String bf=null;
+				while((bf=re.readLine())!=null)b.append(bf).append("\n");
+				re.close();
+				new JSEnv(b.toString(),new PluginJsCbk(ctx,pkg,path));
+				return;
+			}
+			ClassLoader mainloader=ctx.getClassLoader();
             Class c=null;
             try
             {
