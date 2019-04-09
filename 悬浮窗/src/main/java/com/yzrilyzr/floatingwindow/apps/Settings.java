@@ -1,4 +1,5 @@
 package com.yzrilyzr.floatingwindow.apps;
+import com.yzrilyzr.floatingwindow.*;
 import com.yzrilyzr.ui.*;
 
 import android.content.BroadcastReceiver;
@@ -15,14 +16,14 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import com.yzrilyzr.floatingwindow.ANRThread;
-import com.yzrilyzr.floatingwindow.API;
-import com.yzrilyzr.floatingwindow.PluginService;
-import com.yzrilyzr.floatingwindow.R;
-import com.yzrilyzr.floatingwindow.Window;
 import com.yzrilyzr.floatingwindow.apps.cls;
+import com.yzrilyzr.myclass.AES;
 import com.yzrilyzr.myclass.JSEnv;
 import com.yzrilyzr.myclass.util;
+import java.io.File;
+import java.util.Set;
+import java.util.Arrays;
+import java.util.TreeSet;
 
 public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeListener
 {
@@ -90,6 +91,7 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 	{
 		final View v=pq.findViewById(R.id.windowsettingsLinearLayout1);
 		final View v2=pq.findViewById(R.id.windowsettingsLinearLayout2);
+		final View v3=pq.findViewById(R.id.windowsettingsLinearLayout3);
 		OnClickListener o=new OnClickListener(){
 			@Override
 			public void onClick(final View p1)
@@ -120,10 +122,66 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 					.setNegativeButton("取消",null)
 					.show();
 				}
+				else if(p1==v3)
+				{
+					if(!Window.usejs)return;
+					File d=new File(util.mainDir+"js辅助");
+					if(!d.exists())d.mkdirs();
+					final String[] fs=d.list();
+					Arrays.sort(fs);
+					final boolean[] bo=new boolean[fs.length];
+					final Set<String> set=util.getSPRead().getStringSet("enabledjs",null);
+					if(set!=null)
+						for(int i=0;i<fs.length;i++)
+							try
+							{
+								String js=util.readwithN(util.mainDir+"js辅助/"+fs[i]);
+								if(set.contains(AES.encrypt(fs[i],js)))bo[i]=true;
+							}
+							catch(Throwable e)
+							{}
+					b.setTitle("js管理")
+					.setMultiChoiceItems(fs,bo,new DialogInterface.OnMultiChoiceClickListener(){
+						@Override
+						public void onClick(DialogInterface p1, int p2, boolean p3)
+						{
+							bo[p2]=p3;
+						}
+					})
+					.setNegativeButton("取消",null)
+					.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							TreeSet<String> sett=new TreeSet<String>();
+							for(int i=0;i<bo.length;i++)
+							{
+								try
+								{
+									String js=util.readwithN(util.mainDir+"js辅助/"+fs[i]);
+									if(bo[i])
+									{
+										if(!set.contains(AES.encrypt(fs[i],js)))
+											PluginService.jsenv.add(new JSEnv(js,new PluginContext(util.ctx,util.ctx.getPackageName(),util.ctx.getPackageCodePath())));
+										sett.add(AES.encrypt(fs[i],js));
+									}
+								}
+								catch(Throwable e)
+								{
+									e.printStackTrace();
+								}
+							}
+							util.getSPWrite().putStringSet("enabledjs",sett).commit();
+							//PluginService.loadJS();
+						}
+					})
+					.show();
+				}
 			}
 		};
 		v.setOnClickListener(o);
 		v2.setOnClickListener(o);
+		v3.setOnClickListener(o);
 		final mySwitch r=(mySwitch) pq.findViewById(R.id.windowsettingsmySwitch1);
 		final mySwitch r2=(mySwitch) pq.findViewById(R.id.windowsettingsmySwitch3);
 		final mySwitch r3=(mySwitch) pq.findViewById(R.id.windowsettingsmySwitch4);
@@ -164,7 +222,8 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 				else if(p1==r6)
 				{
 					Window.usejs=p2;
-					if(p2)PluginService.jsenv=new JSEnv("print(\"JS辅助已开启\")",this);
+					PluginService.loadJS();
+					//if(p2)PluginService.jsenv=new JSEnv("print(\"JS辅助已开启\")",this);
 				}
 				else if(p1==r7)Window.xposed=p2;
 				else if(p1==r8)

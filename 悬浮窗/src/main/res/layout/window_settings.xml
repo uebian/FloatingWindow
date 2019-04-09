@@ -133,13 +133,24 @@
 			android:layout_width="fill_parent"
 			android:orientation="horizontal"
 			android:gravity="left|center"
-			android:padding="5dp">
+			android:padding="5dp"
+			android:clickable="true"
+			android:focusableInTouchMode="true"
+			android:id="@+id/windowsettingsLinearLayout3">
 
 			<com.yzrilyzr.ui.myTextView
 				android:layout_height="wrap_content"
 				android:text="使用JS辅助"
 				android:layout_width="wrap_content"
 				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.icondesigner.VecView
+				android:layout_height="20dp"
+				vec="forward"
+				android:layout_width="20dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"
+			/>
 
 			<com.yzrilyzr.ui.mySwitch
 				android:layout_height="wrap_content"

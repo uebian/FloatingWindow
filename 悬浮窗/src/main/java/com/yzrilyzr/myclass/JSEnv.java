@@ -39,7 +39,7 @@ public class JSEnv implements Runnable
 			scope = rhino.initStandardObjects();
 			ScriptableObject.putProperty(scope, "javaContext", Context.javaToJS(util.ctx, scope));
 			ScriptableObject.putProperty(scope, "javaLoader", Context.javaToJS(JSEnv.class.getClassLoader(), scope));
-			BufferedReader i=new BufferedReader(new InputStreamReader(util.ctx.getAssets().open("MODPE/BaseApi.js")));
+			BufferedReader i=new BufferedReader(new InputStreamReader(util.ctx.getAssets().open("JS/BaseApi.js")));
 			StringBuilder b=new StringBuilder();
 			String x=null;
 			while((x=i.readLine())!=null)b.append(x).append("\n");
@@ -56,7 +56,7 @@ public class JSEnv implements Runnable
 			try
 			{
 				Context rhino = Context.enter();
-				((Function)scope.get("print",scope)).call(rhino, scope, scope,new Object[]{"js执行失败:"+util.getStackTrace(e)});
+				((Function)scope.get("print",scope)).call(rhino, scope, scope,new Object[]{"js执行失败，详情查看控制台"});
 			}
 			catch(Throwable ee)
 			{}

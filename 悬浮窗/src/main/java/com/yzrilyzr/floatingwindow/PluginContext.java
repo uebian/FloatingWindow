@@ -1,12 +1,12 @@
 package com.yzrilyzr.floatingwindow;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.uidata;
 import java.io.File;
@@ -19,6 +19,7 @@ public class PluginContext extends ContextWrapper
 	private AssetManager am;
 	private Context ctx;
 	private String pkg;
+	private Intent intent;
 	public PluginContext(Context ctx,String pkg,String apkPath) throws Exception
 	{
 		super(ctx);
@@ -29,6 +30,18 @@ public class PluginContext extends ContextWrapper
 		res=new Resources(am,dis,ctx.getResources().getConfiguration());
 		this.ctx=ctx;
 		this.pkg=pkg;
+	}
+	public void setIntent(Intent i){
+		intent=i;
+	}
+	public void print(Object o){
+		util.toast(""+o);
+	}
+	public Context ctx(){
+		return this;
+	}
+	public Intent intent(){
+		return intent;
 	}
 	@Override
 	public AssetManager getAssets()

@@ -1,4 +1,6 @@
 package com.yzrilyzr.floatingwindow;
+import java.io.*;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,23 +14,21 @@ import android.os.Looper;
 import android.widget.ScrollView;
 import com.yzrilyzr.floatingwindow.apps.Console;
 import com.yzrilyzr.floatingwindow.apps.cls;
+import com.yzrilyzr.myclass.AES;
 import com.yzrilyzr.myclass.JSEnv;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myDialog;
 import com.yzrilyzr.ui.myTextView;
 import com.yzrilyzr.ui.uidata;
 import dalvik.system.PathClassLoader;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class PluginService extends android.app.Service implements Thread.UncaughtExceptionHandler
 {
-	public static JSEnv jsenv=null;
+	public static final ArrayList<JSEnv> jsenv=new ArrayList<JSEnv>();
 	public static boolean started=false;
 	@Override
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -60,6 +60,38 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 		c.stopService(new Intent(c,PluginService.class));
 		System.exit(0);
 	}
+	public static final void loadJS()
+	{
+		if(!Window.usejs)return;
+		File d=new File(util.mainDir+"js辅助");
+		if(!d.exists())d.mkdirs();
+		String[] fs=d.list();
+		callJSEnv("remove");
+		jsenv.clear();
+		Set<String> set=util.getSPRead().getStringSet("enabledjs",null);
+		if(set!=null)
+			for(String s:fs)
+				try
+				{
+					String js=util.readwithN(util.mainDir+"js辅助/"+ s);
+					if(set.contains(AES.encrypt(s,js)))
+						jsenv.add(new JSEnv(js,new PluginContext(util.ctx,util.ctx.getPackageName(),util.ctx.getPackageCodePath())));
+				}
+				catch(Throwable e)
+				{
+					e.printStackTrace();
+					util.toast(String.format("载入 %s 时出现错误,详情查看控制台",s));
+				}
+	}
+	public static final void callJSEnv(String name,Object... params)
+	{
+		for(JSEnv j:jsenv)
+		try{
+		j.function(name,params);
+		}catch(Throwable e){
+			e.printStackTrace();
+		}
+	}
     public static final void loadPlugin(final Context ctx,final Intent intent)
     {
         String pkg="",clazz="";
@@ -70,27 +102,32 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 			if(pkg==null)return;
             clazz=intent.getStringExtra("class");
             String path=PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
-            if(clazz.startsWith("js:")){
+            PluginContext pctx=new PluginContext(ctx,pkg,path);
+			if(clazz.startsWith("js:"))
+			{
 				BufferedReader re=new BufferedReader(new InputStreamReader(API.getPkgFile(util.ctx,pkg,"assets/"+clazz.substring(3))));
 				StringBuilder b=new StringBuilder();
 				String bf=null;
 				while((bf=re.readLine())!=null)b.append(bf).append("\n");
 				re.close();
-				new JSEnv(b.toString(),new PluginJsCbk(ctx,pkg,path));
-				return;
+				pctx.setIntent(intent);
+				new JSEnv(b.toString(),pctx);
 			}
-			ClassLoader mainloader=ctx.getClassLoader();
-            Class c=null;
-            try
-            {
-                c=mainloader.loadClass(clazz);
-            }
-            catch(Throwable e)
-            {
-                PathClassLoader pcl=new PathClassLoader(path,mainloader);
-                c=pcl.loadClass(clazz);
-            }
-			c.getConstructor(Context.class,Intent.class).newInstance(new PluginContext(ctx,pkg,path),intent);
+			else
+			{
+				ClassLoader mainloader=ctx.getClassLoader();
+				Class c=null;
+				try
+				{
+					c=mainloader.loadClass(clazz);
+				}
+				catch(Throwable e)
+				{
+					PathClassLoader pcl=new PathClassLoader(path,mainloader);
+					c=pcl.loadClass(clazz);
+				}
+				c.getConstructor(Context.class,Intent.class).newInstance(pctx,intent);
+			}
         }
         catch(Throwable e)
         {
@@ -161,7 +198,7 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 		//if(Resources.getSystem().getDisplayMetrics().density!=3f)
 		//Toast.makeText(this,"安全警告:\n不支持的DPI\n您可以在设置中调节显示效果",1).show();
 		API.startService(this,cls.LOAD);
-		
+
 		if(util.getSPRead().getBoolean("first",true))API.startService(this,cls.SETTINGS);
     }
 	@Override

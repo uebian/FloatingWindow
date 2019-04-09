@@ -29,15 +29,17 @@ public class Load implements Runnable,OnClickListener
 	Window w;
 	Context c;
 	private static boolean once=false,sa=false;
+
+	private boolean safe;
 	public Load(Context ct,Intent e)
 	{
 		if(once)return;
 		once=true;
 		this.c=ct;
         w=new Window(c,util.px(210),util.px(275))
-			.show()
-			.setCanFocus(false)
-			.setCanResize(false);
+		.show()
+		.setCanFocus(false)
+		.setCanResize(false);
 		w.getLayoutParams().type=WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
 		w.dismiss().show().setColor(uidata.BACK);
         LinearLayout v=(LinearLayout) w.getMainView();
@@ -45,7 +47,7 @@ public class Load implements Runnable,OnClickListener
         v.setOnTouchListener(null);
         v.setOrientation(1);
         v.setGravity(Gravity.CENTER);
-         VecView iv=new VecView(c);
+		VecView iv=new VecView(c);
         int ii=util.px(180);
         iv.setImageVec("octocat");//floatingwindow");
         iv.setLayoutParams(new LinearLayout.LayoutParams(ii,ii));
@@ -72,14 +74,27 @@ public class Load implements Runnable,OnClickListener
         ii=util.px(40);
         ml.setLayoutParams(new LinearLayout.LayoutParams(ii,ii));
         v.addView(ml);
+		safe=false;
+		if(util.getSPRead("safemode").getBoolean("enabled",false))
+		{
+			safe=true;
+			onClick(null);
+		}
+		util.getSPWrite("safemode").putBoolean("enabled",true).commit();
         new Thread(){
 			@Override public void run()
 			{
+				try
+				{
+					if(safe)Thread.sleep(700);
+				}
+				catch (InterruptedException e)
+				{}
 				long m=System.currentTimeMillis();
 				Window.readData();
 				uidata.readData();
 				GetServer.get();
-				if(Window.usejs)PluginService.jsenv=new JSEnv("",this);
+				if(Window.usejs)PluginService.loadJS();
 				ANRThread.startMain();
 				StarterView.load(c);
 				PluginPicker.load();
@@ -93,13 +108,16 @@ public class Load implements Runnable,OnClickListener
 	{
 		if(sa)return;
 		sa=true;
-		Window w=new Window(c,util.px(60),util.px(25))
-			.show()
-			.setCanFocus(false)
-			.setColor(0x80000000)
-			.setBColor(0)
-			.setPosition(0,util.getScreenHeight()-util.px(30))
-			.setCanResize(false);
+		myTextViewTitle tv=new myTextViewTitle(c);
+        tv.setText("安全模式");
+        tv.setGravity(Gravity.CENTER);
+		Window w=new Window(c,(int)tv.getPaint().measureText("安全模式"),util.px(25))
+		.show()
+		.setCanFocus(false)
+		.setColor(0x80000000)
+		.setBColor(0)
+		.setPosition(0,util.getScreenHeight()-util.px(30))
+		.setCanResize(false);
 		w.getLayoutParams().type=WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 		w.getLayoutParams().flags=WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 		w.dismiss().show();
@@ -108,35 +126,33 @@ public class Load implements Runnable,OnClickListener
         v.removeAllViews();
         v.setOnTouchListener(null);
         v.setGravity(Gravity.CENTER);
-        myTextViewTitle tv=new myTextViewTitle(c);
-        tv.setText("安全模式");
-        tv.setGravity(Gravity.CENTER);
+        	
         v.addView(tv);
 		new Handler().postDelayed(new Runnable(){
-				@Override
-				public void run()
-				{
-					uidata.UI_DENSITY=(float)util.getScreenWidth()/360f;
-					uidata.TEXTSIZE=12f;
-					uidata.TEXTMAIN=-1447447;
-					uidata.TEXTBACK=-1;
-					uidata.CONTROL=-1118482;
-					uidata.MAIN=-13070228;
-					uidata.BACK=-12895429;
-					uidata.ACCENT=-27859;
-					uidata.BUTTON=-9539986;
-					uidata.UNENABLED=-2236963;
-					Window.startonboot=false;
-					Window.anr=true;
-					Window.crashdialog=false;
-					Window.nolimit=true;
-					Window.notify=true;
-					Window.usejs=false;
-					Window.xposed=false;
-					Window.saveData();
-					uidata.saveData();
-				}
-			},500);
+			@Override
+			public void run()
+			{
+				uidata.UI_DENSITY=(float)util.getScreenWidth()/360f;
+				uidata.TEXTSIZE=12f;
+				uidata.TEXTMAIN=-1447447;
+				uidata.TEXTBACK=-1;
+				uidata.CONTROL=-1118482;
+				uidata.MAIN=-13070228;
+				uidata.BACK=-12895429;
+				uidata.ACCENT=-27859;
+				uidata.BUTTON=-9539986;
+				uidata.UNENABLED=-2236963;
+				Window.startonboot=false;
+				Window.anr=true;
+				Window.crashdialog=false;
+				Window.nolimit=true;
+				Window.notify=true;
+				Window.usejs=false;
+				Window.xposed=false;
+				Window.saveData();
+				uidata.saveData();
+			}
+		},500);
 
 	}
 	@Override
@@ -145,9 +161,11 @@ public class Load implements Runnable,OnClickListener
 		// TODO: Implement this method
 		w.dismiss();
 		API.startService(c,cls.STARTBUTTON);
-		if(Window.devmode){
+		if(Window.devmode)
+		{
 			API.startService(c,cls.CONSOLE);
 			API.startService(c,c.getPackageName()+".apps.UiTest");
 		}
+		util.getSPWrite("safemode").putBoolean("enabled",false).commit();
 	}
 }
