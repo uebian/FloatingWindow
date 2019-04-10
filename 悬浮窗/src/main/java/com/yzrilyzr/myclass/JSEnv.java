@@ -13,11 +13,22 @@ public class JSEnv implements Runnable
 	private Scriptable scope;
 	private String js;
 	private Object cbk;
+	private String name;
 	public JSEnv(String js,Object cbk)
 	{
 		this.js=js;
 		this.cbk=cbk;
 		new Thread(Thread.currentThread().getThreadGroup(),this,"js解析线程",256*1024).start();
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 	public void eval(String func)
 	{

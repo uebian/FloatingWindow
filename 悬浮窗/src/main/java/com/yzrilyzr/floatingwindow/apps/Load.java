@@ -111,11 +111,11 @@ public class Load implements Runnable,OnClickListener
 		myTextViewTitle tv=new myTextViewTitle(c);
         tv.setText("安全模式");
         tv.setGravity(Gravity.CENTER);
-		Window w=new Window(c,(int)tv.getPaint().measureText("安全模式"),util.px(25))
+        Window w=new Window(c,(int)tv.getPaint().measureText("安全模式"),util.px(25))
 		.show()
 		.setCanFocus(false)
 		.setColor(0x80000000)
-		.setBColor(0)
+		.setBColor(0x80000000)
 		.setPosition(0,util.getScreenHeight()-util.px(30))
 		.setCanResize(false);
 		w.getLayoutParams().type=WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
@@ -126,8 +126,8 @@ public class Load implements Runnable,OnClickListener
         v.removeAllViews();
         v.setOnTouchListener(null);
         v.setGravity(Gravity.CENTER);
-        	
-        v.addView(tv);
+		v.addView(tv);
+		//w.setSize(,util.px(30));
 		new Handler().postDelayed(new Runnable(){
 			@Override
 			public void run()

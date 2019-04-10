@@ -124,7 +124,6 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 				}
 				else if(p1==v3)
 				{
-					if(!Window.usejs)return;
 					File d=new File(util.mainDir+"js辅助");
 					if(!d.exists())d.mkdirs();
 					final String[] fs=d.list();
@@ -148,8 +147,20 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 							bo[p2]=p3;
 						}
 					})
+					//.setMessage("注意:如果js文件有变动则默认禁用")
 					.setNegativeButton("取消",null)
-					.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+					/*.setNeutralButton("重新载入选中",new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							if(!Window.usejs){
+								util.toast("请打开js辅助开关");
+								return;
+							}
+							PluginService.loadJS();
+						}
+					})*/
+					.setPositiveButton("保存并重载",new DialogInterface.OnClickListener(){
 						@Override
 						public void onClick(DialogInterface p1, int p2)
 						{
@@ -161,8 +172,8 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 									String js=util.readwithN(util.mainDir+"js辅助/"+fs[i]);
 									if(bo[i])
 									{
-										if(!set.contains(AES.encrypt(fs[i],js)))
-											PluginService.jsenv.add(new JSEnv(js,new PluginContext(util.ctx,util.ctx.getPackageName(),util.ctx.getPackageCodePath())));
+										//if(!set.contains(AES.encrypt(fs[i],js))&&Window.usejs)
+											//PluginService.jsenv.add(new JSEnv(js,new PluginContext(util.ctx,util.ctx.getPackageName(),util.ctx.getPackageCodePath())));
 										sett.add(AES.encrypt(fs[i],js));
 									}
 								}
@@ -172,10 +183,11 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 								}
 							}
 							util.getSPWrite().putStringSet("enabledjs",sett).commit();
-							//PluginService.loadJS();
+							PluginService.loadJS();
 						}
 					})
 					.show();
+					util.toast("注意:如果js文件有变动则默认禁用");
 				}
 			}
 		};
@@ -254,8 +266,6 @@ public class Settings implements Window.OnButtonDown,myViewPager.OnPageChangeLis
 			r4.setChecked(true);
 			r4.setEnabled(false);
 			((ViewGroup)r4.getParent()).getChildAt(0).setEnabled(false);
-
-
 		}
 	}
 	public void initUi()

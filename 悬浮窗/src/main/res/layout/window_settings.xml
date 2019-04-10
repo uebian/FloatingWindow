@@ -135,7 +135,6 @@
 			android:gravity="left|center"
 			android:padding="5dp"
 			android:clickable="true"
-			android:focusableInTouchMode="true"
 			android:id="@+id/windowsettingsLinearLayout3">
 
 			<com.yzrilyzr.ui.myTextView

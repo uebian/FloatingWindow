@@ -69,8 +69,10 @@ Window.OnButtonDown,Window.OnSizeChanged
 	static ConcurrentHashMap<String,Bitmap> ico=new ConcurrentHashMap<String,Bitmap>();
 	static ConcurrentHashMap<String,Long> ico2=new ConcurrentHashMap<String,Long>();
 	IcoTask icotask;
+	protected static ArrayList<Explorer> exinst=new ArrayList<Explorer>();
 	public Explorer(final Context c,Intent e)
 	{
+		exinst.add(this);
 		ctx=c;
 		path=e.getStringExtra("path");
 		category=e.getStringExtra("category");
@@ -98,6 +100,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 					String name=mFilename.getText().toString();
 					API.callBack(ctx,new Intent().putExtra("path",path+"/"+name),rescode);
 					w.dismiss();
+					exinst.remove(this);
 				}
 			});
 		}
@@ -267,6 +270,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			{
 				util.toast("文件不存在");
 				w.dismiss();
+				exinst.remove(this);
 			}
 		}
 		else list();
@@ -322,9 +326,10 @@ Window.OnButtonDown,Window.OnSizeChanged
 	@Override
 	public void onButtonDown(int code)
 	{
-		if(code==Window.ButtonCode.CLOSE)
+		if(code==Window.ButtonCode.CLOSE){
+			exinst.remove(this);
 			if(searchThread!=null)searchThread.cancel(true);
-
+		}
 	}
 	@Override
 	public void onSizeChanged(int w, int h, int oldw, int oldh)
@@ -879,6 +884,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 				{
 					API.callBack(ctx,new Intent().putExtra("path",f.getAbsolutePath()),rescode);
 					w.dismiss();
+					exinst.remove(this);
 				}
 				else mFilename.setText(f.getName());
 			}
@@ -1236,6 +1242,8 @@ Window.OnButtonDown,Window.OnSizeChanged
 			{
 				ww.dismiss();
 				util.toast(run[0]?"操作完毕":"取消操作");
+				if(run[0]&&cutc)for(Explorer w:exinst)
+					w.list();
 				if(hasErr)util.toast("复制时出现错误，详情查看控制台");
 				list();
 			}
