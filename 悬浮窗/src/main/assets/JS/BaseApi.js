@@ -8,8 +8,11 @@ function _callMethod(str){
 	eval(str);
 	_cbk.print("执行完毕");
 }
-function ctx(){
-	return _cbk.ctx();
+function getCtx(){
+	return _cbk.getCtx();
+}
+function getIntent(){
+	return _cbk.getIntent();
 }
 function close(){}
 function print(s){

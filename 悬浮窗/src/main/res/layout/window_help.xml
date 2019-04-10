@@ -55,11 +55,28 @@
 			android:text="(长按按钮可能会有不同的功能哦)"
 			android:layout_margin="5dp"/>
 
-		<include
-			layout="@layout/window_main"
-			android:layout_width="200dp"
+		<FrameLayout
 			android:layout_height="200dp"
-			android:layout_gravity="center"/>
+			android:layout_gravity="center"
+			android:layout_width="200dp">
+
+			<com.yzrilyzr.ui.myLinearLayoutRound
+				android:layout_height="200dp"
+				android:layout_width="200dp"/>
+
+			<com.yzrilyzr.ui.myLinearLayoutBack
+				android:layout_height="166dp"
+				android:layout_width="192dp"
+				android:layout_marginLeft="4dp"
+				android:layout_marginRight="4dp"
+				android:layout_marginTop="30dp"/>
+
+			<include
+				layout="@layout/window_main"
+				android:layout_width="200dp"
+				android:layout_height="200dp"/>
+
+		</FrameLayout>
 
 		<com.yzrilyzr.ui.myTextView
 			android:layout_height="wrap_content"
@@ -270,24 +287,29 @@
 				android:layout_gravity="center"/>
 
 		</LinearLayout>
+
 		<com.yzrilyzr.ui.myTextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:text="点击章鱼猫即可进入安全模式"
 			android:layout_margin="5dp"/>
+
 		<com.yzrilyzr.ui.myLinearLayout
 			android:layout_height="1px"
 			android:layout_width="match_parent"/>
+
 		<com.yzrilyzr.ui.myTextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:text="进入安全模式，悬浮窗的某些设置将被重置"
 			android:layout_margin="5dp"/>
+
 		<com.yzrilyzr.ui.myTextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:text="包括颜色主题设置和窗口设置，开启ANR检测"
 			android:layout_margin="5dp"/>
+
 		<com.yzrilyzr.ui.myLinearLayout
 			android:layout_height="1px"
 			android:layout_width="match_parent"/>

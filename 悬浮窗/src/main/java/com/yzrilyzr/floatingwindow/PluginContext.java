@@ -12,6 +12,8 @@ import com.yzrilyzr.ui.uidata;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import android.os.Handler;
+import android.os.Looper;
 
 public class PluginContext extends ContextWrapper
 {
@@ -20,6 +22,7 @@ public class PluginContext extends ContextWrapper
 	private Context ctx;
 	private String pkg;
 	private Intent intent;
+	private Handler h=new Handler(util.ctx.getMainLooper());
 	public PluginContext(Context ctx,String pkg,String apkPath) throws Exception
 	{
 		super(ctx);
@@ -37,10 +40,15 @@ public class PluginContext extends ContextWrapper
 	public void print(Object o){
 		util.toast(""+o);
 	}
-	public Context ctx(){
+	public Context getCtx(){
 		return this;
 	}
-	public Intent intent(){
+	public void runOnUiThread(Runnable r){
+		Looper l=util.ctx.getMainLooper();
+		if(l.isCurrentThread())r.run();
+		else h.post(r);
+	}
+	public Intent getIntent(){
 		return intent;
 	}
 	@Override

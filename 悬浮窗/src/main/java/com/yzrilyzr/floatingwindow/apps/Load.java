@@ -132,15 +132,16 @@ public class Load implements Runnable,OnClickListener
 			@Override
 			public void run()
 			{
+				int a=0xff000000;
 				uidata.UI_DENSITY=(float)util.getScreenWidth()/360f;
 				uidata.TEXTSIZE=12f;
 				uidata.TEXTMAIN=-1447447;
 				uidata.TEXTBACK=-1;
 				uidata.CONTROL=-1118482;
-				uidata.MAIN=-13070228;
-				uidata.BACK=-12895429;
-				uidata.ACCENT=-27859;
-				uidata.BUTTON=-9539986;
+				uidata.MAIN|=a;
+				uidata.BACK|=a;
+				uidata.ACCENT|=a;
+				uidata.BUTTON|=a;
 				uidata.UNENABLED=-2236963;
 				Window.startonboot=false;
 				Window.anr=true;

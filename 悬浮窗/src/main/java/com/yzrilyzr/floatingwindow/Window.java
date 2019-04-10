@@ -798,7 +798,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     {
         public void onCrash(Throwable e)throws Throwable;
     }
-	class Back extends Drawable
+	public class Back extends Drawable
 	{
 		protected Paint paint;
 		protected RectF rectF,rectF2;

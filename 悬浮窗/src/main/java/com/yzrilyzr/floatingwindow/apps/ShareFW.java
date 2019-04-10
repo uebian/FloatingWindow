@@ -16,23 +16,36 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
-public class ShareFW implements OnClickListener
+public class ShareFW implements OnClickListener,Runnable
 {
-	public ShareFW(Context c,Intent e){
-		BluetoothManager b=(BluetoothManager) c.getSystemService(c.BLUETOOTH_SERVICE);
-		BluetoothAdapter a=b.getAdapter();
-		while(!a.isEnabled())a.enable();
+	public ShareFW(Context c,Intent e)
+	{
+		new Thread(this).start();
 		myTextView mtv=new myTextView(c);
 		mtv.setText("请打开手机蓝牙设置\n然后配对设备(对方需要打开可见性)\n之后点击下方的分享发送");
 		myButton f=new myButton(c);
 		f.setText("分享");
 		f.setOnClickListener(this);
-		new Window(c,util.px(200),util.px(150))
+		new Window(c,util.px(200),util.px(140))
 		.addView(mtv)
 		.addView(f)
 		.setIcon("loadout")
 		.setTitle("分享本程序")
 		.show();
+	}
+
+	public void run()
+	{
+		try
+		{
+			BluetoothManager b=(BluetoothManager) util.ctx.getSystemService(util.ctx.BLUETOOTH_SERVICE);
+			BluetoothAdapter a=b.getAdapter();
+			while(!a.isEnabled())a.enable();
+		}
+		catch(Throwable ex)
+		{
+			util.toast("无法打开蓝牙");
+		}
 	}
 	@Override
 	public void onClick(View p1)
