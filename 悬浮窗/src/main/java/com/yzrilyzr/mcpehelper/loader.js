@@ -4,7 +4,7 @@ var path=ctx.getPackageManager()
 			android.content.pm.PackageInfo.INSTALL_LOCATION_AUTO)
 		.applicationInfo.publicSourceDir;
 var loader=new Packages.dalvik.system.PathClassLoader(path,ctx.getClass().getClassLoader());
-var tob=loader.loadClass("com.yzrilyzr.jscalljava.Main").getConstructors()[0];
+var tob=loader.loadClass("com.yzrilyzr.mcpehelper.Main").getConstructors()[0];
 tob=tob.newInstance([ctx,
 new java.lang.reflect.InvocationHandler(){
 	invoke:function(o, m, p) {

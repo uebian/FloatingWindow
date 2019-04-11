@@ -47,7 +47,7 @@ public class Console extends PluginContext implements Window.OnButtonDown,OnChec
 	public PluginContext plctx;
 	public Console(Context c,Intent e) throws Exception
 	{
-		super(c,c.getPackageName(),c.getPackageCodePath());
+		super(c,e.getStringExtra("path"),c.getPackageCodePath());
 		setIntent(e);
 		ctx=c;
 		w=new Window(c,util.px(300),util.px(360))

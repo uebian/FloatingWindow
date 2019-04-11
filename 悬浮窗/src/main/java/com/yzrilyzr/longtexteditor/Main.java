@@ -423,7 +423,10 @@ API.startService(ctx,"com.yzrilyzr.longtexteditor.Settings");
 				l.setText(gg);
 				break;
 			case R.id.windowlongtexteditorVecView14:
-				API.startService(ctx,new Intent().putExtra("jstext",l.getText()),cls.CONSOLE);
+				String pp=file;
+				int c=pp.lastIndexOf("/");
+				if(c!=-1)pp=pp.substring(0,c);
+				API.startService(ctx,new Intent().putExtra("jstext",l.getText()).putExtra("path",pp),cls.CONSOLE);
 				break;
 
 		}

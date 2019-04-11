@@ -105,7 +105,7 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 			ZipEntry en=ff.getEntry(file);
 			return ff.getInputStream(en);
 		}
-		throw new Exception("未知文件");
+		throw new Exception("未知文件:"+pkg);
 	}
     public static final void loadPlugin(final Context ctx,final Intent intent)
     {
