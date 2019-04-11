@@ -21,6 +21,15 @@ function print(s){
 function clientMessage(s){
 	_cbk.print("<客户端信息>"+s);
 }
+function getStatic(k){
+	return _cbk.getStatic(k);
+}
+function setStatic(k,v){
+	_cbk.setStatic(k,v);
+}
+function res(path){
+	return _cbk.res(path);
+}
 var util=com.yzrilyzr.myclass.util;
 var Window=com.yzrilyzr.floatingwindow.Window;
 var API=com.yzrilyzr.floatingwindow.API;

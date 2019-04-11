@@ -222,7 +222,18 @@ public final class util
         }
         return keyword;
     }
-
+	public static String readwithN(InputStream is)throws IOException
+    {
+        StringBuffer sb=new StringBuffer();
+        String st="";
+        BufferedReader br=new BufferedReader(new InputStreamReader(is));
+        while((st=br.readLine())!=null)
+        {
+			sb.append(st).append("\n");
+		}
+        br.close();
+        return sb.toString();
+    }
     public static String readwithN(String path)throws IOException
     {
         StringBuffer sb=new StringBuffer();

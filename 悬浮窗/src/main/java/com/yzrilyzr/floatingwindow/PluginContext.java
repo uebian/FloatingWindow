@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import android.os.Handler;
 import android.os.Looper;
+import java.util.HashMap;
 
 public class PluginContext extends ContextWrapper
 {
@@ -23,6 +24,7 @@ public class PluginContext extends ContextWrapper
 	private String pkg;
 	private Intent intent;
 	private Handler h=new Handler(util.ctx.getMainLooper());
+	private static final HashMap<String,Object> data=new HashMap<String,Object>();
 	public PluginContext(Context ctx,String pkg,String apkPath) throws Exception
 	{
 		super(ctx);
@@ -42,6 +44,15 @@ public class PluginContext extends ContextWrapper
 	}
 	public Context getCtx(){
 		return this;
+	}
+	public void saveStatic(String k,Object v){
+		data.put(k,v);
+	}
+	public Object getStatic(String k){
+		return data.get(k);
+	}
+	public InputStream res(String file) throws Exception{
+		return PluginService.getPluginPkgFile(pkg,file);
 	}
 	public void runOnUiThread(Runnable r){
 		Looper l=util.ctx.getMainLooper();

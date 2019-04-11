@@ -25,6 +25,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class PluginService extends android.app.Service implements Thread.UncaughtExceptionHandler
 {
@@ -86,11 +88,24 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 	public static final void callJSEnv(String name,Object... params)
 	{
 		for(JSEnv j:jsenv)
-		try{
-		j.function(name,params);
-		}catch(Throwable e){
-			e.printStackTrace();
+			try
+			{
+				j.function(name,params);
+			}
+			catch(Throwable e)
+			{
+				e.printStackTrace();
+			}
+	}
+	public static final InputStream getPluginPkgFile(String pkg,String file) throws Exception{
+		File f=new File(pkg);
+		if(f.isDirectory())return new BufferedInputStream(new FileInputStream(f.getAbsolutePath()+"/"+file));
+		else if(f.isFile()){
+			ZipFile ff=new ZipFile(f);
+			ZipEntry en=ff.getEntry(file);
+			return ff.getInputStream(en);
 		}
+		throw new Exception("未知文件");
 	}
     public static final void loadPlugin(final Context ctx,final Intent intent)
     {
@@ -101,33 +116,26 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
 			pkg=intent.getStringExtra("pkg");
 			if(pkg==null)return;
             clazz=intent.getStringExtra("class");
-            String path=PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
-            PluginContext pctx=new PluginContext(ctx,pkg,path);
-			if(clazz.startsWith("js:"))
-			{
-				BufferedReader re=new BufferedReader(new InputStreamReader(API.getPkgFile(util.ctx,pkg,"assets/"+clazz.substring(3))));
-				StringBuilder b=new StringBuilder();
-				String bf=null;
-				while((bf=re.readLine())!=null)b.append(bf).append("\n");
-				re.close();
-				pctx.setIntent(intent);
-				new JSEnv(b.toString(),pctx);
+            if(pkg.startsWith("pkg:")){
+				pkg=pkg.substring(4);
+				PluginContext pc=new PluginContext(ctx,pkg,pkg);
+				pc.setIntent(intent);
+				new JSEnv(util.readwithN(getPluginPkgFile(pkg,clazz)),pc);
+				return;
 			}
-			else
+			String path=PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
+            ClassLoader mainloader=ctx.getClassLoader();
+			Class c=null;
+			try
 			{
-				ClassLoader mainloader=ctx.getClassLoader();
-				Class c=null;
-				try
-				{
-					c=mainloader.loadClass(clazz);
-				}
-				catch(Throwable e)
-				{
-					PathClassLoader pcl=new PathClassLoader(path,mainloader);
-					c=pcl.loadClass(clazz);
-				}
-				c.getConstructor(Context.class,Intent.class).newInstance(pctx,intent);
+				c=mainloader.loadClass(clazz);
 			}
+			catch(Throwable e)
+			{
+				PathClassLoader pcl=new PathClassLoader(path,mainloader);
+				c=pcl.loadClass(clazz);
+			}
+			c.getConstructor(Context.class,Intent.class).newInstance(new PluginContext(ctx,pkg,path),intent);
         }
         catch(Throwable e)
         {

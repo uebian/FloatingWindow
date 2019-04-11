@@ -1,6 +1,6 @@
 util.toast("c")
-var ctx=ctx()
-ctx.runOnUiThread(new Runnable(){
+var ctx=getCtx()
+ctx.runOnUiThread(new java.lang.Runnable(){
 	run:function(){
 		new Window(ctx,300,300).show();
 	}

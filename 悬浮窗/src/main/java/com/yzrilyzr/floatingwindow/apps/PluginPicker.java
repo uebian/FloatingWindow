@@ -22,6 +22,8 @@ import com.yzrilyzr.floatingwindow.viewholder.HolderGrid;
 import com.yzrilyzr.icondesigner.VECfile;
 import com.yzrilyzr.myclass.util;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +69,7 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 				// TODO: Implement this method
 				return 0;
 			}
-			
+
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
@@ -187,30 +189,6 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 									cache.add(m);
 								}
 							}
-							cls=ai.metaData.getString("fwpluginjs",null);
-							if(cls!=null)
-							{
-								cls=cls.replace(" ","");
-								String[] cs=cls.split(";");
-								for(String s:cs)
-								{
-									String[] k=s.split(":");
-									String[] g=k[1].split("@");
-									Map<String,Object> m=new HashMap<String,Object>();
-									if(g.length==1)m.put("icon",appInfo.loadIcon(pm));
-									else if(g.length==2)
-									{
-										if(g[1].startsWith("V"))
-											m.put("icon",new BitmapDrawable(VECfile.createBitmap(VECfile.readFileFromIs(API.getPkgFile(util.ctx,appInfo.packageName,"assets/"+g[1].substring(1)+".vec")),util.px(64),util.px(64))));
-										else if(g[1].startsWith("D"))m.put("icon",new BitmapDrawable(BitmapFactory.decodeStream(API.getPkgFile(util.ctx,appInfo.packageName,g[1].substring(1)))));
-									}
-									m.put("pkg",appInfo.packageName);
-									m.put("text1",k[0]);
-									m.put("class","js:"+g[0]);
-									m.put("text2",appInfo.loadLabel(pm));
-									cache.add(m);
-								}
-							}
 						}
 					}
 					catch(Throwable ep)
@@ -218,6 +196,47 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 						util.toast("读取插件信息错误:"+appInfo.loadLabel(pm)+"\n详情查看控制台");
 						ep.printStackTrace();
 					}
+				}
+			}
+			File d=new File(util.mainDir+"插件包");
+			if(!d.exists())d.mkdirs();
+			File[] fs=d.listFiles();
+			for(File f:fs)
+			{
+				try
+				{
+					String cls=util.readwithN(PluginService.getPluginPkgFile(f.getAbsolutePath(),"info"));
+					if(cls!=null)
+					{
+						cls=cls.replaceAll(" |\\n|	","");
+						String[] cs=cls.split(";");
+						for(String s:cs)
+						{
+							if("".equals(s))continue;
+							String[] k=s.split(":");
+							if(k.length<2)continue;
+							String[] g=k[1].split("@");
+							Map<String,Object> m=new HashMap<String,Object>();
+							if(g.length==1)m.put("icon",new BitmapDrawable(VECfile.createBitmap(util.ctx,"class",util.px(64),util.px(64))));
+							else if(g.length==2)
+							{
+								InputStream in=PluginService.getPluginPkgFile(f.getAbsolutePath(),g[1].substring(1));
+								if(g[1].startsWith("V"))
+									m.put("icon",new BitmapDrawable(VECfile.createBitmap(VECfile.readFileFromIs(in),util.px(64),util.px(64))));
+								else if(g[1].startsWith("D"))m.put("icon",new BitmapDrawable(BitmapFactory.decodeStream(in)));
+							}
+							m.put("pkg","pkg:"+f.getAbsolutePath());
+							m.put("text1",k[0]);
+							m.put("class",g[0]);
+							m.put("text2","插件包");
+							cache.add(m);
+						}
+					}
+				}
+				catch(Throwable e)
+				{
+					util.toast("读取插件包信息错误:"+f.getName()+"\n详情查看控制台");
+					e.printStackTrace();
 				}
 			}
 			last.clear();

@@ -88,9 +88,6 @@
             android:name="fwpluginclasses"
             android:value="@string/reg_apps"/>
 		<meta-data
-            android:name="fwpluginjs"
-            android:value="@string/reg_js"/>
-		<meta-data
             android:name="xposedmodule"
             android:value="true" />
         <meta-data

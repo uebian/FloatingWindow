@@ -67,6 +67,9 @@ public class myDialog extends Dialog
 		neg.setTextColor(uidata.MAIN);
 		neu.setTextColor(uidata.MAIN);
 		pos.setTextColor(uidata.MAIN);
+		pos.setVisibility(8);
+		neg.setVisibility(8);
+		neu.setVisibility(8);
 		neg.setBackgroundDrawable(new myRippleDrawable(uidata.BACK));
 		neu.setBackgroundDrawable(new myRippleDrawable(uidata.BACK));
 		pos.setBackgroundDrawable(new myRippleDrawable(uidata.BACK));
@@ -171,6 +174,7 @@ public class myDialog extends Dialog
 		{
 			dialog.buttonBar.setVisibility(0);
 			dialog.pos.setText(text);
+			dialog.pos.setVisibility(0);
 			dialog.pos.setOnClickListener(new View.OnClickListener(){
 					@Override
 					public void onClick(View p1)
@@ -190,6 +194,7 @@ public class myDialog extends Dialog
 		{
 			dialog.buttonBar.setVisibility(0);
 			dialog.neg.setText(text);
+			dialog.neg.setVisibility(0);
 			dialog.neg.setOnClickListener(new View.OnClickListener(){
 					@Override
 					public void onClick(View p1)
@@ -209,6 +214,7 @@ public class myDialog extends Dialog
 		{
 			dialog.buttonBar.setVisibility(0);
 			dialog.neu.setText(text);
+			dialog.neu.setVisibility(0);
 			dialog.neu.setOnClickListener(new View.OnClickListener(){
 					@Override
 					public void onClick(View p1)

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -16,6 +17,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.yzrilyzr.floatingwindow.API;
+import com.yzrilyzr.floatingwindow.PluginContext;
 import com.yzrilyzr.floatingwindow.R;
 import com.yzrilyzr.floatingwindow.Window;
 import com.yzrilyzr.floatingwindow.apps.cls;
@@ -24,8 +26,9 @@ import com.yzrilyzr.longtexteditor.LongTextView;
 import com.yzrilyzr.myclass.JSEnv;
 import com.yzrilyzr.myclass.util;
 import java.util.concurrent.CopyOnWriteArrayList;
+import android.os.Handler;
 
-public class Console implements Window.OnButtonDown,OnCheckedChangeListener,myTextView.OnEditorActionListener,myViewPager.OnPageChangeListener,OnClickListener
+public class Console extends PluginContext implements Window.OnButtonDown,OnCheckedChangeListener,myTextView.OnEditorActionListener,myViewPager.OnPageChangeListener,OnClickListener
 {
 	public static final OS out=new OS();
 	public static final OS err=new OS();
@@ -41,8 +44,11 @@ public class Console implements Window.OnButtonDown,OnCheckedChangeListener,myTe
 	private VecView op2;
 	private Context ctx;
 	private Window w;
-	public Console(Context c,Intent e)
+	public PluginContext plctx;
+	public Console(Context c,Intent e) throws Exception
 	{
+		super(c,c.getPackageName(),c.getPackageCodePath());
+		setIntent(e);
 		ctx=c;
 		w=new Window(c,util.px(300),util.px(360))
 			.setTitle("控制台")
@@ -120,6 +126,7 @@ public class Console implements Window.OnButtonDown,OnCheckedChangeListener,myTe
 			print("#打开一个JS文件以执行");
 		}
 	}
+	
 	public void print(Object o)
 	{
 		b.addText(o+"");
