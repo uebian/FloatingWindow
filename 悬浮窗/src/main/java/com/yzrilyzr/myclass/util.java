@@ -464,6 +464,7 @@ public final class util
 				}
 			}
 		}
+		else return type;
 		if(type.equals("*/*"))
 		{
 			try

@@ -92,7 +92,7 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 	@Override
 	public void onSizeChanged(int w, int h, int oldw, int oldh)
 	{
-		mlv.setNumColumns(w/util.px(50));
+		if(mlv!=null)mlv.setNumColumns(w/util.px(50));
 	}
 	@Override
 	public void onButtonDown(int code)
@@ -228,7 +228,7 @@ public class PluginPicker implements AdapterView.OnItemClickListener,Window.OnSi
 							m.put("pkg","pkg:"+f.getAbsolutePath());
 							m.put("text1",k[0]);
 							m.put("class",g[0]);
-							m.put("text2","插件包");
+							m.put("text2",f.getName());
 							cache.add(m);
 						}
 					}

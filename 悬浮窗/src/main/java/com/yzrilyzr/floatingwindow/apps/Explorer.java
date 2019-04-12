@@ -13,10 +13,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -35,10 +35,8 @@ import com.yzrilyzr.myclass.util;
 import java.lang.reflect.Method;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
-import java.util.concurrent.CopyOnWriteArrayList;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Explorer implements AdapterView.OnItemClickListener,
 AdapterView.OnItemLongClickListener,View.OnClickListener,
@@ -1610,6 +1608,14 @@ Window.OnButtonDown,Window.OnSizeChanged
 		name.setHint(f.getName());
 		((TextView)v.getChildAt(2)).append(类型);
 		((TextView)v.getChildAt(3)).append(select? f.getParent() :f.getAbsolutePath());
+		((TextView)v.getChildAt(3)).setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View p1)
+			{
+				util.copy(select? f.getParent() :f.getAbsolutePath());
+				util.toast("已复制路径至剪贴板");
+			}
+		});
 		if(f.isFile()&&!select)((TextView)v.getChildAt(6)).append(util.getFileSizeStr(f.length())+"("+Long.toString(f.length())+" 字节)");
 		((TextView)v.getChildAt(7)).append(select?"/":new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(f.lastModified())));
 		final CheckBox cb1=(CheckBox) v.findViewById(R.id.windowfileinfomyCheckBox1);

@@ -17,6 +17,8 @@ import com.yzrilyzr.ui.myTextView;
 import com.yzrilyzr.ui.uidata;
 import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 public class Window implements View.OnClickListener,View.OnTouchListener,View.OnLongClickListener
 {
     public static final ArrayList<Window> windowList=new ArrayList<Window>();
@@ -51,6 +53,13 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 	public static boolean nolimit=true,crashdialog=false,startonboot=true,anr=false,notify=true,usejs=false;
 	public static boolean xposed=false,devmode=false;
 	public static int type=WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+	private OnClickListener edittextfocus=new OnClickListener(){
+		@Override
+		public void onClick(View p1)
+		{
+			checkFocus();
+		}
+	};
     public Window(Context ctx,int widt,int heigh)
     {
 		if(widt==-2||heigh==-2)util.toast("窗口大小不建议为-2");
@@ -106,7 +115,16 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 			windowParam.y=Math.max(0,(util.getScreenHeight()-height)/2);
 		}
     }
-
+	private void viewFocusClick(View v){
+		if(v instanceof ViewGroup){
+			ViewGroup g=(ViewGroup)v;
+			for(int i=0;i<g.getChildCount();i++){
+				View a=g.getChildAt(i);
+				if(!a.hasOnClickListeners())a.setOnClickListener(edittextfocus);
+				else viewFocusClick(a);
+			}
+		}
+	}
 	public void setResize(boolean resize)
 	{
 		this.resize = resize;
@@ -550,6 +568,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     public Window addView(View view)
     {
         contentView.addView(view);
+		viewFocusClick(view);
         return this;
     }
     public Window update()
