@@ -178,9 +178,9 @@ public class PluginService extends android.app.Service implements Thread.Uncaugh
     public void onCreate()
     {
 		super.onCreate();
-		if(!util.getSPRead("abouta").getBoolean("abouta",false))fstop(this);
 		util.ctx=getApplicationContext();
-        Copyright.k();
+		if(!util.getSPRead("abouta").getBoolean("abouta",false))fstop(this);
+		Copyright.k();
 		started=true;
 		System.setOut(new PrintStream(Console.out));
 		System.setErr(new PrintStream(Console.err));

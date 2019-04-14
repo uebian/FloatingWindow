@@ -34,6 +34,10 @@ var util=com.yzrilyzr.myclass.util;
 var Window=com.yzrilyzr.floatingwindow.Window;
 var API=com.yzrilyzr.floatingwindow.API;
 var UI=com.yzrilyzr.ui;
+var VECfile=com.yzrilyzr.icondesigner.VECfile;
+function px(i){
+	return util.px(i);
+}
 var ModPE={
 	setItem:function(a,b,c,d,e){_cbk.print("设置物品,id:"+a+",名称:"+b+",damage:"+c+",贴图名:"+d+",可堆叠数:"+e);},
 	setFoodItem:function(a,b,c,d,e,f){_cbk.print("设置食物物品,id:"+a+",名称:"+b+",damage:"+c+",恢复饥饿:"+d+",贴图名:"+e+",可堆叠数:"+f);},

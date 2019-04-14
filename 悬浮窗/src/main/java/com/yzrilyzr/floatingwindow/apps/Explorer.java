@@ -1497,8 +1497,11 @@ Window.OnButtonDown,Window.OnSizeChanged
 			ss="已挂载存储:"+l.size();
 			ls.clear();
 			Set<String> set=util.getSPRead().getStringSet("explorershortcuts",null);
-			if(set!=null)for(String s:set)
-				{
+			String[] su=new String[set.size()];
+			int i=0;
+			if(set!=null)for(String s:set)su[i++]=s;
+			Arrays.sort(su);
+			if(i!=0)for(String s:su){
 					if(s.contains("ftp://")||s.contains("https://")||s.contains("http://")||s.contains("sync:"))l.add(s);
 					else l.add(new mFile(s));
 				}

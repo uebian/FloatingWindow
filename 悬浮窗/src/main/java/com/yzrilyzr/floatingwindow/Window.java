@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.graphics.drawable.BitmapDrawable;
 public class Window implements View.OnClickListener,View.OnTouchListener,View.OnLongClickListener
 {
     public static final ArrayList<Window> windowList=new ArrayList<Window>();
@@ -408,6 +409,14 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 		b.setBounds(0,0,w,w);
 		b.draw(c);
         return this;
+    }
+	public Window setIcon(VECfile pb)
+    {
+		//icon.setImageVecFile(pb);
+		//minButton.setImageVecFile(pb);
+		int w=util.px(30);
+		iconBmp=VECfile.createBitmap(pb,w,w);
+		return setIcon(new BitmapDrawable(iconBmp));
     }
     public Window setIcon(String vecAsset)
 	{
