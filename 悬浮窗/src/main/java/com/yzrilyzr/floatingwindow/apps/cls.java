@@ -19,7 +19,8 @@ public final class cls
 	TEXTEDITOR="com.yzrilyzr.longtexteditor.Main",
 	TOWINDOW=p+"ToWindow",
 	PLAYER=p+"Player",
-	EXPLORER=p+"Explorer"
+	EXPLORER=p+"Explorer",
+	FILESYNC=p+"FileSync"
 	;
 	
 }

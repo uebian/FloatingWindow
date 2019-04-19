@@ -191,6 +191,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 							}
 						}
 						else if(m.contains("vec"))vec=classz;
+						else if(m.contains("filesync"))vec=sync;
 						else if(m.contains("audio"))vec=music;
 						else if(m.contains("video"))vec=video;
 						else if(m.contains("text"))vec=mFile;
@@ -215,7 +216,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 					String f=(String)o;
 					name=f;
 					if(f.contains("ftp://"))vec=ftp;
-					else if(f.contains("sync:"))vec=sync;
+					//else if(f.contains("sync:"))vec=sync;
 					else if(f.contains("http://")||f.contains("https://"))vec=internet;
 					((View)holder.icon.getParent()).setBackgroundColor(selected.contains(f)?uidata.ACCENT:0);
 				}
@@ -902,7 +903,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			}
 			else if(s.contains("https://")||s.contains("http://"))
 				API.startService(ctx,new Intent().putExtra("url",s),cls.WEBVIEWER);
-			else if(s.contains("sync:"));
+			//else if(s.contains("sync:"));
 		}
 		setSearchMode(false);
 	}
@@ -1502,7 +1503,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			if(set!=null)for(String s:set)su[i++]=s;
 			Arrays.sort(su);
 			if(i!=0)for(String s:su){
-					if(s.contains("ftp://")||s.contains("https://")||s.contains("http://")||s.contains("sync:"))l.add(s);
+					if(s.contains("ftp://")||s.contains("https://")||s.contains("http://")/*||s.contains("sync:")*/)l.add(s);
 					else l.add(new mFile(s));
 				}
         }

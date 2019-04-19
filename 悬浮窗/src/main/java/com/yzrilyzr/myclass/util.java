@@ -563,6 +563,7 @@ public final class util
 	{".rmvb",   "audio/x-pn-realaudio"},  
 	{".rtf",    "application/rtf"},  
 	{".sh", 	"text/plain"},  
+	{".fsync", 	"application/filesync"},
 	{".tar",    "application/x-tar"},     
 	{".tgz",    "application/x-compressed"},   
 	{".txt",    "text/plain"},
@@ -592,6 +593,9 @@ public final class util
 				{
 					case "vec":
 						API.startService(ctx,e.putExtra("type",2),cls.IMAGEVIEWER);
+						break;
+					case "filesync":
+						API.startService(ctx,e,cls.FILESYNC);
 						break;
 					default:
 					openFile(new File(path));
