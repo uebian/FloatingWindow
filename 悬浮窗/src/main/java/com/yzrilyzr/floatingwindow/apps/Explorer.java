@@ -1252,6 +1252,8 @@ Window.OnButtonDown,Window.OnSizeChanged
 	{
 		final ArrayList<mFile> del=new ArrayList<mFile>();
 		final ArrayList<mFile> deldir=new ArrayList<mFile>();
+		final boolean[] b=new boolean[1];
+		b[0]=true;
 		final myDialog.Builder bd=new myDialog.Builder(ctx)
 		.setTitle("删除")
 		.setPositiveButton("确定",new DialogInterface.OnClickListener(){
@@ -1397,13 +1399,21 @@ Window.OnButtonDown,Window.OnSizeChanged
 			}
 		})
 
-		.setNegativeButton("取消",null);
+		.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface p1, int p2)
+			{
+				b[0]=false;
+			}
+		}
+	);
 		bd.show();
 		new AsyncTask(){
 			long len=0;
 			int fc=0,dc=0;
 			private void list(mFile f)
 			{
+				if(!b[0])return;
 				if(f.isFile())
 				{len+=f.length();fc++;}
 				if(f.isDirectory())
@@ -1431,11 +1441,14 @@ Window.OnButtonDown,Window.OnSizeChanged
 			@Override
 			protected void onPostExecute(Object result)
 			{
+				try{
+					if(!b[0])return;
 				bd.setMessage(String.format("确定要删除 %s%s\n%s大小：%s",
 				select?selected.get(0).getName():g.getName(),
 				(select?"…("+selected.size()+"项)":""),
 				(select||g.isDirectory()?"包含:"+fc+"个文件 "+dc+"个文件夹，":""),
 				util.getFileSizeStr(!select&&g.isFile()?g.length():len)));
+				}catch(Throwable e){}
 			}
 		}.execute();
 	}
@@ -1498,14 +1511,16 @@ Window.OnButtonDown,Window.OnSizeChanged
 			ss="已挂载存储:"+l.size();
 			ls.clear();
 			Set<String> set=util.getSPRead().getStringSet("explorershortcuts",null);
+			if(set!=null){
 			String[] su=new String[set.size()];
 			int i=0;
-			if(set!=null)for(String s:set)su[i++]=s;
+			for(String s:set)su[i++]=s;
 			Arrays.sort(su);
 			if(i!=0)for(String s:su){
 					if(s.contains("ftp://")||s.contains("https://")||s.contains("http://")/*||s.contains("sync:")*/)l.add(s);
 					else l.add(new mFile(s));
 				}
+			}
         }
 		else
 		{
