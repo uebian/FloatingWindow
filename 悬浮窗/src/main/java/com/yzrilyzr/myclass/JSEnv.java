@@ -7,6 +7,8 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeoutException;
 
 public class JSEnv implements Runnable
 {
@@ -45,21 +47,30 @@ public class JSEnv implements Runnable
 	{
 		try
 		{
-			Context rhino = Context.enter();
+			final Context rhino = Context.enter();
 			rhino.setOptimizationLevel(-1);
 			scope = rhino.initStandardObjects();
 			ScriptableObject.putProperty(scope, "javaContext", Context.javaToJS(util.ctx, scope));
 			ScriptableObject.putProperty(scope, "javaLoader", Context.javaToJS(JSEnv.class.getClassLoader(), scope));
 			BufferedReader i=new BufferedReader(new InputStreamReader(util.ctx.getAssets().open("JS/BaseApi.js")));
-			StringBuilder b=new StringBuilder();
+			final StringBuilder b=new StringBuilder();
 			String x=null;
 			while((x=i.readLine())!=null)b.append(x).append("\n");
 			i.close();
-			rhino.evaluateString(scope,b.toString(),"NativeCode",1,null);
-			((Function)scope.get("_setcbk",scope)).call(rhino, scope, scope,new Object[]{cbk});
-			rhino.evaluateString(scope,js,"JS",1, null);
-			rhino.evaluateString(scope,b.toString(),"NativeCode",1,null);
-			((Function)scope.get("_setcbk",scope)).call(rhino, scope, scope,new Object[]{cbk});
+			Object o=util.execInTime(new Callable<Object>(){
+				@Override
+				public Object call() throws Exception
+				{
+					sand
+					rhino.evaluateString(scope,b.toString(),"NativeCode",1,null);
+					((Function)scope.get("_setcbk",scope)).call(rhino, scope, scope,new Object[]{cbk});
+					rhino.evaluateString(scope,js,"JS",1, null);
+					rhino.evaluateString(scope,b.toString(),"NativeCode",1,null);
+					((Function)scope.get("_setcbk",scope)).call(rhino, scope, scope,new Object[]{cbk});
+					return null;
+				}
+			},10000);
+			if(o instanceof Exception)throw new TimeoutException("执行js时间超时");
 		}
 		catch(Exception e)
 		{

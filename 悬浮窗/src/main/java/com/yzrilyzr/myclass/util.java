@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -22,14 +23,18 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import com.yzrilyzr.floatingwindow.API;
 import com.yzrilyzr.floatingwindow.Copyright;
+import com.yzrilyzr.floatingwindow.PluginService;
 import com.yzrilyzr.floatingwindow.apps.cls;
 import com.yzrilyzr.ui.myDialog;
 import com.yzrilyzr.ui.myToast;
 import com.yzrilyzr.ui.uidata;
 import java.lang.reflect.Method;
 import java.util.List;
-import android.os.Build;
-import com.yzrilyzr.floatingwindow.PluginService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Callable;
 
 public final class util
 {
@@ -106,10 +111,12 @@ public final class util
 		InputMethodManager ime=((InputMethodManager)ctx.getSystemService(Context.INPUT_METHOD_SERVICE));
 		ime.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
 	}
-	public static String getFileSizeStr(double size){
+	public static String getFileSizeStr(double size)
+	{
 		String[] s="B KB MB GB TB".split(" ");
 		int i=0;
-		while(size>=1024){
+		while(size>=1024)
+		{
 			size/=1024;
 			i++;
 		}
@@ -179,6 +186,19 @@ public final class util
 		if(x<0)a=Math.PI-a;
 		if(x>0&&y<0)a+=2*Math.PI;
 		return a;
+	}
+	public static Object execInTime(Callable<?> call,int timeMillis)
+	{
+		final ExecutorService exec = Executors.newFixedThreadPool(1);  
+		try
+		{  
+			Future<?> future = exec.submit(call);  
+			return future.get(timeMillis, TimeUnit.MILLISECONDS); //任务处理超时时间设为 1 秒  
+		}
+		catch (Exception e)
+		{
+			return e;
+		}  
 	}
     public static String getStackTrace(Throwable t)
     {
@@ -312,7 +332,7 @@ public final class util
     {
 		return ctx. getSharedPreferences(file,Activity.MODE_PRIVATE).edit();
     } 
-	
+
     public static Typeface getTypefaceFA(String path)
     {
         AssetManager mgr=ctx.getAssets();
@@ -598,7 +618,7 @@ public final class util
 						API.startService(ctx,e,cls.FILESYNC);
 						break;
 					default:
-					openFile(new File(path));
+						openFile(new File(path));
 				}
 				break;
 			case "audio":

@@ -1586,7 +1586,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			classz=VECfile.createBitmap(ctx,"class",d,d),
 			music=VECfile.createBitmap(ctx,"music",d,d),
 			video=VECfile.createBitmap(ctx,"video",d,d),
-			mFile=VECfile.createBitmap(ctx,"mFile",d,d),
+			mFile=VECfile.createBitmap(ctx,"mfile",d,d),
 			unknown=VECfile.createBitmap(ctx,"unknownfile",d,d),
 			folder=VECfile.createBitmap(ctx,"folder",d,d),
 			packagee=VECfile.createBitmap(ctx,"package",d,d),
@@ -1620,7 +1620,9 @@ Window.OnButtonDown,Window.OnSizeChanged
 			((ImageView)v.findViewById(R.id.windowfileinfoImageView1)).setImageBitmap(vec);
 		}
 		catch(Throwable e)
-		{}
+		{
+			e.printStackTrace();
+		}
 		final EditText name=(EditText)v.findViewById(R.id.windowfileinfomyEditText1);
 		name.setText(select?"多个文件":f.getName());
 		name.setEnabled(!select);

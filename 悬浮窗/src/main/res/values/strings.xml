@@ -10,7 +10,6 @@
 		文件管理:.apps.Explorer@Vexplorer;
 		文件改动校验:.apps.FileCheckChanged@Vfilechanged;
 		性能测试:.apps.PerformanceTest@Vperformance;
-		窗口化:.apps.ToWindow@Vtowindow;
 		文件同步:.apps.FileSync@Vsync;
 		JS加密器:.apps.JsEncode@Vjsencode;
 		速拍:.apps.FastCam@Vfastcam;
