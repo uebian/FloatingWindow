@@ -9,6 +9,8 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
+import com.cloudbees.util.rhino.sandbox.SandboxContextFactory;
+import org.mozilla.javascript.ContextFactory;
 
 public class JSEnv implements Runnable
 {
@@ -47,7 +49,9 @@ public class JSEnv implements Runnable
 	{
 		try
 		{
-			final Context rhino = Context.enter();
+			SandboxContextFactory sand=new SandboxContextFactory();
+			//sand.initGlobal);
+			final Context rhino = sand.enter();
 			rhino.setOptimizationLevel(-1);
 			scope = rhino.initStandardObjects();
 			ScriptableObject.putProperty(scope, "javaContext", Context.javaToJS(util.ctx, scope));
@@ -61,7 +65,6 @@ public class JSEnv implements Runnable
 				@Override
 				public Object call() throws Exception
 				{
-					sand
 					rhino.evaluateString(scope,b.toString(),"NativeCode",1,null);
 					((Function)scope.get("_setcbk",scope)).call(rhino, scope, scope,new Object[]{cbk});
 					rhino.evaluateString(scope,js,"JS",1, null);

@@ -24,6 +24,7 @@ import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myTabLayout;
 import com.yzrilyzr.ui.myViewPager;
 import android.view.KeyEvent;
+import com.yzrilyzr.myclass.myComp;
 
 public class Home extends myActivity implements AdapterView.OnItemClickListener
 {
@@ -119,7 +120,7 @@ public class Home extends myActivity implements AdapterView.OnItemClickListener
 			m.put("text1",appInfo.loadLabel(pm));
 			l2.add(m);
         }
-		Collections.sort(l2,new Comparator<Map>(){
+		Collections.sort(l2,new myComp<Map>(){
 				@Override
 				public int compare(Map p1, Map p2)
 				{

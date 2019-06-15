@@ -17,8 +17,10 @@ import com.yzrilyzr.icondesigner.VecView;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.icondesigner.VECfile;
 import android.graphics.drawable.ColorDrawable;
+import java.util.List;
+import android.annotation.TargetApi;
 public class myDialog extends Dialog
-{	
+{
 	myLinearLayout content;
 	LinearLayout view,buttonBar;
 	myTextView title;
@@ -99,6 +101,19 @@ public class myDialog extends Dialog
 		title.setVisibility(titlep==null?8:0);
 		if(titlep!=null)title.setText(titlep);
 	}
+	@Override
+	@TargetApi(28)
+	public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, Menu menu, int deviceId)
+	{
+		// TODO: Implement this method
+	}
+	@TargetApi(28)
+	@Override
+	public void onPointerCaptureChanged(boolean hasCapture)
+	{
+		// TODO: Implement this method
+	}
+	
 	public static class Builder
     {
 		private Context ctx;

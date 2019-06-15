@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +30,7 @@ import com.yzrilyzr.floatingwindow.viewholder.BaseHolder;
 import com.yzrilyzr.icondesigner.VECfile;
 import com.yzrilyzr.icondesigner.VecView;
 import com.yzrilyzr.myclass.MusicID3;
+import com.yzrilyzr.myclass.myComp;
 import com.yzrilyzr.myclass.util;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -36,11 +38,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
-import android.os.AsyncTask;
 public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListener
 {
 	int index=0,mode=1;//0播放列表后停止，1播放列表后循环，2单曲循环,3随机
@@ -93,7 +93,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 		albumname=(TextView)view.findViewById(R.id.musicplayeralbum);
 		album=(ImageView)view.findViewById(R.id.windowplayerImageView1);
 		util.setWeight(album);
-		view.findViewById(R.id.musicplayerImageButton1)
+		((View)view.findViewById(R.id.musicplayerImageButton1))
 		.setOnClickListener(new OnClickListener(){@Override public void onClick(View v)
 			{
 				if(++mode>3)mode=0;
@@ -102,7 +102,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 				else if(mode==2)((VecView)v).setImageVec("round1");
 				else if(mode==3)((VecView)v).setImageVec("random");
 			}});
-		view.findViewById(R.id.musicplayerImageButton2)
+		((View)view.findViewById(R.id.musicplayerImageButton2))
 		.setOnClickListener(new OnClickListener(){@Override public void onClick(View v)
 			{
 				try
@@ -138,7 +138,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 				((VecView)p).setImageVec("play");
 				return true;
 			}});
-		view.findViewById(R.id.musicplayerImageButton4)
+		((View)view.findViewById(R.id.musicplayerImageButton4))
 		.setOnClickListener(new OnClickListener(){@Override public void onClick(View v)
 			{
 				try
@@ -161,7 +161,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 				{util.toast("出错"+e);}
 
 			}});
-		view.findViewById(R.id.musicplayerImageButton5)
+		((View)view.findViewById(R.id.musicplayerImageButton5))
 		.setOnClickListener(new OnClickListener(){
 
 			private AsyncTask search;@Override public void onClick(View v)
@@ -169,7 +169,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 				if(search==null)search=new Search().execute();
 				else search.cancel(true);
 			}});
-		view.findViewById(R.id.windowplayerEdit)
+		((View)view.findViewById(R.id.windowplayerEdit))
 		.setOnClickListener(new OnClickListener(){@Override public void onClick(View v)
 			{
 				edit();
@@ -196,7 +196,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 			File[] pf=new File(path).getParentFile().listFiles();
 			for(File ff:pf)
 				if(util.getMIMEType(ff).contains("audio/"))queue.add(ff);
-			Collections.sort(queue,new Comparator<File>(){
+			Collections.sort(queue,new myComp<File>(){
 				@Override
 				public int compare(File p1, File p2)
 				{
@@ -732,7 +732,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 		@Override
 		public void onPostExecute(Object s)
 		{
-			Collections.sort(music,new Comparator<File>(){
+			Collections.sort(music,new myComp<File>(){
 				@Override
 				public int compare(File p1, File p2)
 				{
@@ -746,7 +746,7 @@ public class Player implements Window.OnButtonDown,MediaPlayer.OnCompletionListe
 		@Override
 		public void onCancelled(Object o)
 		{
-			Collections.sort(music,new Comparator<File>(){
+			Collections.sort(music,new myComp<File>(){
 				@Override
 				public int compare(File p1, File p2)
 				{

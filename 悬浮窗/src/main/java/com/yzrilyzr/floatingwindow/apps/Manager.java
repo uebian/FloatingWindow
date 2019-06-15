@@ -28,6 +28,7 @@ import com.yzrilyzr.floatingwindow.Window;
 import com.yzrilyzr.floatingwindow.view.Graph;
 import com.yzrilyzr.floatingwindow.viewholder.HolderList;
 import com.yzrilyzr.icondesigner.VecView;
+import com.yzrilyzr.myclass.myComp;
 import com.yzrilyzr.myclass.util;
 
 public class Manager implements Runnable,Window.OnButtonDown
@@ -497,7 +498,7 @@ public class Manager implements Runnable,Window.OnButtonDown
 			int actualSize=topGroup.enumerate(slackList);  
 			list=new Thread[actualSize];  
 			System.arraycopy(slackList,0,list,0,actualSize);
-			Arrays.sort(list,new Comparator<Thread>(){
+			Arrays.sort(list,new myComp<Thread>(){
 					@Override
 					public int compare(Thread p1, Thread p2)
 					{
@@ -513,7 +514,7 @@ public class Manager implements Runnable,Window.OnButtonDown
 			final PackageManager pm = ctx.getPackageManager(); 
 			// 查询所有已经安装的应用程序 
 			List<ApplicationInfo> listAppcations = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES); 
-			Collections.sort(listAppcations,new Comparator<ApplicationInfo>(){
+			Collections.sort(listAppcations,new myComp<ApplicationInfo>(){
 					@Override
 					public int compare(ApplicationInfo p1, ApplicationInfo p2)
 					{

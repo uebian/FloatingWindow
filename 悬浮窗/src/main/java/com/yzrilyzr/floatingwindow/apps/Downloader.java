@@ -45,7 +45,7 @@ public class Downloader implements OnClickListener,Window.OnButtonDown,TextWatch
 		dd=v.getChildAt(1);
 		e1=(EditText)v.findViewById(R.id.windowwebviewerdownloadmyEditText1);
 		e2=(EditText) v.findViewById(R.id.windowwebviewerdownloadmyEditText2);
-		v.findViewById(R.id.windowwebviewerdownloadVecView1).setOnClickListener(this);
+		((View)v.findViewById(R.id.windowwebviewerdownloadVecView1)).setOnClickListener(this);
 		pgb=(myProgressBar) v.findViewById(R.id.windowwebviewerdownloadmyProgressBar1);
 		e1.setText(p1);
 		e1.addTextChangedListener(this);

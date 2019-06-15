@@ -31,6 +31,7 @@ import com.yzrilyzr.floatingwindow.R;
 import com.yzrilyzr.floatingwindow.Window;
 import com.yzrilyzr.icondesigner.VECfile;
 import com.yzrilyzr.icondesigner.VecView;
+import com.yzrilyzr.myclass.myComp;
 import com.yzrilyzr.myclass.util;
 import java.lang.reflect.Method;
 import java.nio.channels.FileChannel;
@@ -91,7 +92,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			v.getChildAt(4).setVisibility(0);
 			mFilename=(EditText)v.findViewById(R.id.windowexplorerEditText1);
 			mFilename.setText(e.getStringExtra("savemFile"));
-			v.findViewById(R.id.windowexplorerButton1).setOnClickListener(new OnClickListener(){
+			((View)v.findViewById(R.id.windowexplorerButton1)).setOnClickListener(new OnClickListener(){
 				@Override
 				public void onClick(View p1)
 				{
@@ -420,7 +421,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 									search.clear();
 									k=0;
 									mFileTraversal(new mFile(path==null?"/storage":path));
-									/*Collections.sort(search,new Comparator<mFile>(){
+									/*Collections.sort(search,new myComp<mFile>(){
 									 @Override
 									 public int compare(mFile p1, mFile p2)
 									 {
@@ -1530,7 +1531,7 @@ Window.OnButtonDown,Window.OnSizeChanged
 			w.setTitle(pf.getName());
 			pathtext.setText(pf.getAbsolutePath());
 			l.clear();
-			Comparator<mFile> cp=new Comparator<mFile>(){
+			myComp<mFile> cp=new myComp<mFile>(){
 				@Override
 				public int compare(mFile p1, mFile p2)
 				{
