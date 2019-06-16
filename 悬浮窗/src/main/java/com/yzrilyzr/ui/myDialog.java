@@ -101,12 +101,7 @@ public class myDialog extends Dialog
 		title.setVisibility(titlep==null?8:0);
 		if(titlep!=null)title.setText(titlep);
 	}
-	@Override
-	@TargetApi(28)
-	public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, Menu menu, int deviceId)
-	{
-		// TODO: Implement this method
-	}
+	
 	@TargetApi(28)
 	@Override
 	public void onPointerCaptureChanged(boolean hasCapture)
